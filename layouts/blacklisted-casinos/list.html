@@ -1,0 +1,17 @@
+{{ define "main" }} {{ $data := index .Site.Data .Site.Language.Lang }} {{
+partial "page-title.html" . }} {{ partial "cta.html" . }}
+
+<section class="section">
+  <div class="container">
+    {{ if $data.blacklist_casinos.info.enable }}
+    {{ with $data.blacklist_casinos.info }}
+        <div class="section-content">
+            {{ .content | markdownify }}
+        </div>
+    {{ end }}
+    {{ end }}
+{{ .Content }}
+  </div>
+</section>
+
+{{ end }}

@@ -1,0 +1,26 @@
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ with .Site.Params.clients_logo }}
+<section class="section-sm bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        {{ with $data.homepage.clients_logo }}
+        <h2 class="section-title">
+          {{ .title }}</h2>
+        <p class="section-description">
+          {{ .content }}
+        </p>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="client-logo-slider">
+      {{ range . }}
+      <div class="text-center py-3 px-2"><img class="d-unset img-fluid" src="{{ .logo | absURL }}" alt="client-logo">
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

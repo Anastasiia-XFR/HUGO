@@ -3,15 +3,14 @@
   <title>{{ .Title }}</title>
 
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="{{ with .Params.Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
   {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
   {{ hugo.Generator }}
 
   {{ "<!-- plugins -->" | safeHTML }}
   {{ range .Site.Params.plugins.css }}
-  <link rel="stylesheet" href="{{ .link | relURL }}">
+  <link rel="stylesheet" href="{{ .link | absURL }} ">
   {{ end }}
 
   {{ "<!-- Main Stylesheet -->" | safeHTML }}
@@ -19,13 +18,10 @@
   <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 
   {{ "<!--Favicon-->" | safeHTML }}
-  <link rel="shortcut icon" href="{{ `images/favicon.png` | relURL }}" type="image/x-icon">
-  <link rel="icon" href="{{ `images/favicon.png` | relURL }}" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ `images/favicon/apple-touch-icon.png` | relURL }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ `images/favicon/favicon-32x32.png` | relURL }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ `images/favicon/favicon-16x16.png` | relURL }}">
-  <link rel="manifest" href="{{ `images/favicon/site.webmanifest` | relURL }}">
-  <link rel="mask-icon" href="{{ `images/favicon/safari-pinned-tab.svg` | relURL }}" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#2b5797">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="{{ `images/favicon.png` | absURL }} " type="image/x-icon">
+  <link rel="icon" href="{{ `images/favicon.png` | absURL }} " type="image/x-icon">
+
+
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>

@@ -1,0 +1,55 @@
+<section class="section bg-light" id="top-casinos">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h2 class="section-title text-uppercase">Top 5 Casinos New Jersey</h2>
+              </div>
+            {{ range .Site.Params.top_casino }}
+            <div class="col-lg-4 col-sm-6 mb-4">
+              <div class="card rounded-0 text-center hover-bg-secondary">
+                <div class="card-body p-4">
+                  <img class="card-logo" src="{{ .img | relURL }}" alt="{{ .title }}" />
+                  <h4 class="card-title">{{ .title }}</h4>
+                  <table class="card-table text-left">
+                  
+                    <tr>
+                      <th>1st deposit Bonus</th>
+                      <td>{{ .first_deposit_bonus }}</td>
+                    </tr>
+                    <tr>
+                      <th>Bonus</th>
+                      <td>{{ .bonus }}</td>
+                    </tr>
+                    <tr>
+                      <th>Games</th>
+                      <td>
+                        {{ range .games }}
+                        <span class="mr-2"> {{ . }}</span>/
+                        {{ end }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Features</th>
+                      <td>
+                        {{ range .features }}
+                        <span class="mr-2"> {{ . }}</span>/
+                        {{ end }}
+                      </td>
+                    </tr>
+                   
+                    <tr class="text-center">
+                      <td colspan="2">
+                        <a class="btn btn-primary btn-sm" href="{{ .visit }}?ref=slotsnj" target="_blank"> Visit </a>
+                    
+                        <a class="btn btn-primary btn-sm" href="{{ .review }}?ref=slotsnj" target="_blank"> review </a>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {{ end }}
+          </div>
+          
+    </div>
+</section>

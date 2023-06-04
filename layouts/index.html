@@ -2,273 +2,124 @@
 
 {{ $data := index .Site.Data .Site.Language.Lang }}
 
-<!-- banner -->
-{{ if $data.homepage.banner.enable }}
+<!-- hero area -->
 {{ with $data.homepage.banner }}
-<section class="slider d-flex" style="background-image: url('{{ .bg_image | relURL }}');">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="block">
-          <img src="{{ .banner_img | relURL  }}" alt="{{ .Site.Title }}" width="{{ .banner_img_width }}">
-          <h1 class="slider-title">{{ .title | markdownify }}</h1>
-        
-          {{ if .button.enable }}
-          {{ with .button }}
-          <a href="{{ .link | relLangURL }}" target="_blank" class="btn btn-main animated fadeInUp">{{ .label }}</a>
+<section class="hero-section bg-cover position-relative overlay"
+  style="background-image: url('{{ .bg_image | relURL }}');">
+  <div class="hero-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 mx-auto text-center">
+          <h1 class="text-white mb-5 text-capitalize">{{ .title | markdownify }}</h1>
+          <p class="text-light mb-4 mx-lg-5 px-lg-5 content">{{ .content | markdownify }}</p>
+          <!-- {{ if .button_solid.enable }}
+          {{ with .button_solid }}
+          <a href="{{ .link | relLangURL }}" class="btn btn-primary m-2">{{ .label }}</a>
           {{ end }}
+          {{ end }} -->
+
+          <!-- {{ if .button_outline.enable }}
+          {{ with .button_outline }}
+          <a href="{{ .link | relLangURL }}" class="btn btn-outline-primary m-2">{{ .label }}</a>
           {{ end }}
+          {{ end }} -->
         </div>
-
       </div>
-
     </div>
   </div>
+  {{ end }}
 </section>
+<!-- /hero area -->
+
+<!-- cta -->
+{{ if $data.homepage.cta.enable }}
+{{ partial "cta.html" . }}
 {{ end }}
-{{ end }}
-<!-- /banner -->
 
-<!-- section -->
-<article class="pg-section py-0">
+
+<!-- about -->
+{{ if $data.homepage.legal.enable }}
+{{ with $data.homepage.legal }}
+<section class="section bg-secondary-reverse">
   <div class="container">
     <div class="row">
-      <div class="col-md-4  my-50">
-       <h2 class="heading-2"> {{ i18n "home-news" }}</h2>
-       {{ range first 6 (where .Site.Pages "Type" "news") }}
-       <section class="post-demo">
-        <div class="post-demo-meta">
-          <span>{{ .PublishDate.Format "2006-01-02"  }} </span><br>
-          <b>{{  .PublishDate.Format "15:04" }}</b>
-        </div>
-        <div class="post-demo-body">
-          <h4 class="post-demo-heading"><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
-        </div>
-
-      </section>
-      {{ end }}
-      <a href="{{ `/news/` | relURL }}" class="btn-link"> {{ i18n "go_to_news" }}</a>
-    </div>
-    <div class="col-md-4 my-50">
-     <h2 class="heading-2"> {{ i18n "home-prognozy" }}</h2>
-     {{ range first 6 (where .Site.Pages "Type" "prognozy") }}
-     <section class="post-demo">
-      <div class="post-demo-meta">
-        <span>{{ .PublishDate.Format "2006-01-02"  }} </span><br>
-        <b>{{  .PublishDate.Format "15:04" }}</b>
+      <div class="col-md-6 mb-4 mb-md-0 pr-lg-5">
+        <img src="{{ .image | relURL }}" alt="about" class="img-fluid">
       </div>
-      <div class="post-demo-body">
-        <h4 class="post-demo-heading"><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
-      </div>
-
-    </section>
-    {{ end }}
-    <a href="{{ `/prognozy/` | relURL }}" class="btn-link"> {{ i18n "go_to_prognozy" }}</a>
-  </div>
-  <div class="col-md-4 my-50">
-    <h2 class="heading-2">{{ i18n "home-ratings" }}</h2>
-
-    {{ range first 6 (where .Site.Pages "Type" "ratings") }}
-    <section class="post-demo">
-      <div class="post-demo-meta">
-        <span>{{ .PublishDate.Format "2006-01-02"  }} </span><br>
-        <b>{{  .PublishDate.Format "15:04" }}</b>
-      </div>
-      <div class="post-demo-body">
-        <h4 class="post-demo-heading"><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
-      </div>
-
-    </section>
-    {{ end }}
-    <a href="{{ `/ratings/` | relURL }}" class="btn-link"> {{ i18n "go_to_ratings" }}</a>
-  </div>
-</div>
-</div>
-</article>
-<!-- /section -->
-
-<!-- section -->
-<section class="pg-section bg-4">
-  <div class="container">
-    <div class="box1">
-      <div class="box1-header">
-        <span>
-          3 шага
-        </span>
-        <h3 class="box1-title">
-          КАК НАЧАТЬ ДЕЛАТЬ СТАВКИ?
-        </h3>
-        <a href="{{ `/ratings/` | relURL }}" class="btn-bg-blue">
-          УЗНАТЬ БОЛЬШЕ
-        </a>
-      </div>
-      <div class="box1-content">
-        <div class="box1-col">
-          <b>01</b>
-          <a href="/2020/02/07/kakuyu-bukmekerskuyu-kontoru-vybrat-pyat-osnovnyh-kriteriev/">
-            <span>
-              как выбрать букмекерскую контору
-            </span>
-          </a>
-        </div>
-        <div class="box1-col">
-          <b>02</b>
-
-          <a href="/2019/12/25/kak-zaregistrirovatsya-v-bukmekerskoj-kontore/">
-            <span>
-              зарегистрироваться в букмекерской которе
-            </span>
-          </a>
-
-        </div>
-        <div class="box1-col">
-          <b>03</b>
-          <a href="/2019/12/25/bukmekerskie-sovety-novichkam/">
-            <span>
-              букмекерские советы новичкам
-            </span>
-          </a>
-        </div>
-      </div>
-      <a href="{{ `/ratings/` | relURL }}" class="btn-bg-blue btn-sm">
-        УЗНАТЬ БОЛЬШЕ
-      </a>
-    </div>
-  </div>
-</section>
-<!-- /section -->
-
-
-<!-- section -->
-<section class="pg-section">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-sm-6">
-        <h2 class="heading-1">
-          Бонусы & ставки
-        </h2>
-        <p class="text-1 row-1">
-          О них говорят везде и всегда, о них упоминают в первую очередь на любом баннере и видеоролике, называя громко большую цифру денег или процент, который игрок получит при регистрации...
-        </p>
-
-        <div>
-          <a href="#" class="btn-link">УЗНАТЬ ПРОГНОЗЫ</a>
-          <a href="#" class="btn-link">ПОСМОТРЕТЬ РЕЙТИНГИ</a>
-        </div>
-
-      </div>
-      <div class="col-sm-6 row-2">
-
-        <picture class="img-1">
-          <source srcset="{{ `images/bg-home-3.webp` | relURL }}" type="image/webp"  height="400">
-           <img  src="{{ `images/bg-home-3.png` | relURL }}" alt="{{ .Site.Title }}"  height="400">
-         </picture>
-
-
-       </div>
-
-     </div>
-   </div>
- </section>
- <!-- /section -->
-
- <!-- section -->
- <section class="pg-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-        {{ range first 1 (where .Site.Pages "Type" "stavki") }}
-        <figure class="card1">
-          <div class="card1-content">
-            <span class="card1-meta">
-              <small class="icon-clock"></small>&nbsp;
-              {{ .PublishDate.Format "2006-01-02"  }}
-            </span>
-            <h3 class="card1-title">
-             <a href="{{ .Permalink }}">
-              {{ .Title }}
-            </a>
-          </h3>
-          <a href="{{ .Permalink }}" class="btn-link">
-            БОЛЬШЕ СТАВОК
-          </a>
-        </div>
-        <div class="card1-pic">
-
-          <picture>
-            <source srcset="{{ `images/bg-stavki.png` | relURL }}" type="image/webp" height="200">
-              <img src="{{ `images/bg-stavki.png` | relURL }}" alt="ALT" height="200">
-            </picture>
-
-          </div>
-        </figure>
+      <div class="col-md-6 pl-lg-4">
+        <div class="content mb-4">{{ .content | markdownify }}</div>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | relLangURL }}" class="btn btn-primary">{{ .label }}</a>
+        {{ end }}
         {{ end }}
       </div>
-      <div class="col-sm-6">
-        {{ range first 1 (where .Site.Pages "Type" "bonuses") }}
-        <figure class="card1">
-          <div class="card1-content">
-            <span class="card1-meta">
-              <small class="icon-clock"></small>
-              {{ .PublishDate.Format "2006-01-02"  }}
-            </span>
-            <h3 class="card1-title">
-             <a href="{{ .Permalink }}">
-              {{ .Title }}
-            </a>
-          </h3>
-          <a href="{{ .Permalink }}" class="btn-link">
-           ВСЕ БОНУСЫ
-         </a>
-       </div>
-       <div class="card1-pic">
+    </div>
+  </div>
+</section>
+{{end}}
+{{end}}
+<!-- /about -->
 
-        <picture>
-          <source srcset="{{ `images/bg-bonuses.png` | relURL }}" type="image/webp" height="200">
-            <img src="{{ `images/bg-bonuses.png` | relURL }}" alt="ALT" height="200">
-          </picture>
+{{ partial "_table_top_casinos.html" . }}
 
+<!-- about -->
+{{ if $data.homepage.secure.enable }}
+{{ with $data.homepage.secure }}
+<section class="section bg-secondary-reverse-white">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-md-6 pl-lg-4">
+        <div class="content mb-4">{{ .content | markdownify }}</div>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | relLangURL }}" class="btn btn-primary">{{ .label }}</a>
+        {{ end }}
+        {{ end }}
+      </div>
+      <div class="col-md-6 mt-4 mt-md-0 pl-lg-5">
+        <img src="{{ .image | relURL }}" alt="about" class="img-fluid">
+      </div>
+      
+    </div>
+  </div>
+</section>
+{{end}}
+{{end}}
+<!-- /about -->
+
+<!-- service -->
+{{ if $data.homepage.service.enable }}
+{{ with $data.homepage.service }}
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .service_item }}
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card rounded-0 text-center hover-bg-secondary">
+          <div class="card-body p-4">
+            <img class="icon-rounded text-white" src="{{ .icon | relURL }}"> 
+            <h4 class="card-title mt-3">{{ .title | markdownify }}</h4>
+            <P class="card-text content">{{ .content | markdownify }}</P>
+          </div>
         </div>
-      </figure>
+      </div>
       {{ end }}
     </div>
   </div>
-  <div class="row">
-    <nav class="tags-list">
-      <a href="tags/">
-        <small>#</small>
-        БАСКЕТБОЛ
-      </a>
-      <a href="tags/">
-        <small>#</small>
-        ВОЛЕЙБОЛ
-      </a>
-      <a href="tags/">
-        <small>#</small>
-        ЕДИНОБОРСТВА
-      </a>
-      <a href="tags/">
-        <small>#</small>
-        КИБЕРСПОРТ
-      </a>
-      <a href="tags/">
-        <small>#</small>
-        ТЕННИС
-      </a>
-      <a href="tags/">
-        <small>#</small>
-        ФУТБОЛ
-      </a>
-      <a href="tags/">
-        <small>#</small>
-        ХОККЕЙ
-      </a>
-    </nav>
-
-  </div>
-</div>
 </section>
-<!-- /section -->
+{{ end }}
+{{ end }}
+<!-- /service -->
+
+<!-- clients -->
+{{ if $data.homepage.clients_logo.enable }}
+{{ partial "clients-logo-slider.html" . }}
+{{ end }}
+<!-- /clients -->
 
 {{ end }}

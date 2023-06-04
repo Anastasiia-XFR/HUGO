@@ -1,74 +1,183 @@
-// .navigation {
-//   box-shadow: $bxsd;
-//   background: $grad2;
-//   padding: 5px 0;
+.navigation {
+  transition: .3s ease;
+  &.fixed-top{
+    @include desktop {
+      position: sticky !important;
+    }
+  }
+  @include desktop {
+    background: $secondary-color;
+  }
+}
 
-//   .navbar {
-//     margin-bottom: 0px;
-//     border: 0px;
-//     //@include flex(flex, center, space-between, wrap);
-//     // &::before, &::after {
-//     //   display: none;
-//     // }
-//   }
+.nav-bg {
+  background-color: $secondary-color;
+  box-shadow: 0px 10px 20px 0px rgba(0, 141, 236, 0.10);
 
-//   .navbar-brand {
-//     height: auto;
-//   }
+  .navbar {
+    padding: 10px 0;
+  }
+}
 
-//   .navbar {
-//     background: none;
-//     border: 0px;
+.navbar{
+  padding: 25px 0;
+  transition: .3s ease;
+  
+  &-nav {
+    margin: 0 auto;
+  }
 
-//     .navbar-nav {
+  .dropdown {
+    &:hover {
+      .dropdown-menu {
+        visibility: visible;
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
 
-//       >li {
-//         >a {
-//           color: #5C5C5C;
-//           padding: 10px 15px;
+    &-menu {
+      box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.12);
+      padding: 15px;
+      border: 0;
+      top: 50px;
+      left: -10px;
+      border-radius: 0;
+      display: block;
+      visibility: hidden;
+      transition: .3s ease;
+      opacity: 0;
+      transform: scale(.95);
+      background: $secondary-color;
 
-//           font : {
-//             weight: 500;
-//             size: 14px;
-//           }
+      @include desktop {
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        transform-origin: unset;
+      }
 
-//           text-transform:uppercase;
+      &.show {
+        visibility: hidden;
 
-//           &:hover,
-//           &:focus {
-//             color: #000;
-//             background: transparent;
-//           }
-//         }
+        @include desktop {
+          visibility: visible;
+          display: block;
+        }
+      }
+    }
 
-//         select {
-//           margin: 10px 15px;
-//         }
-//       }
-//     }
+    &-item {
+      position: relative;
+      color: $white;
+      transition: .2s ease;
+      padding: 10px;
 
-//     .dropdown-menu {
-//       border-radius: 0;
-//       border: none;
-//       left: -5px;
-//       box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.08);
+      @include desktop {
+        text-align: center;
+      }
 
-//       a {
-//         font-weight: normal;
-//         color: #808080;
-//         padding: 10px 20px;
-//         @include transition (all, 0.3s, ease);
+      &:hover {
+        color: $white;
+        background: $primary-color;
+        padding-left: 15px;
+      }
+    }
+  }
+}
 
-//         &:hover {
-//           background: $primary-color;
-//           color: $light;
-//           padding-left: 25px;
-//         }
-//       }
-//     }
-//   }
-// }
+.nav-item {
+  margin: 0;
+  position: relative;
+  &::before{
+    position: absolute;
+    content: "";
+    left: 10%;
+    bottom: 10px;
+    height: 2px;
+    width: 80%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .3s ease;
+    background: $primary-color;
+    @include desktop {
+      display: none;
+    }
+  }
+  &.active,&:hover{
+    &::before{
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
 
-// .nav .open>a {
-//   background: transparent;
-// }
+  .nav-link{
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 13px;
+  }
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: $white;
+  &:hover{
+    color: $white;
+  }
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 20px;
+}
+
+
+/* search */
+.search-btn {
+  border: 0;
+  background: transparent;
+  color: $white;
+}
+
+.search-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  visibility: hidden;
+  transition: .2s ease;
+  opacity: 0;
+  display: none;
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+  }
+}
+
+.search-box {
+  height: 100%;
+  width: 100%;
+  border: 0;
+  background: $white;
+  font-size: 20px;
+  padding: 0;
+
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.search-close {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  page-break-after: 10px;
+  font-size: 20px;
+}

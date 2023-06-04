@@ -1,0 +1,22 @@
+---
+title: Video restrictive Spotlight Sports Group s Harry von Behr on US offshoot markets
+author: xforeal 
+type: post
+date: 2020-07-24T00:00:00+00:00
+excerpt: 'Continuing our associate subject in the most recent GI Huddle talk with, NJ Slots Online plunked down for a top to bottom QA with Harry von Behr, procedure and business improvement chief at Spotlight Sports Group '
+
+
+image : images/news/2020/07/spotlight-1-1.jpg
+categories:
+  - news
+
+---
+Continuing our associate subject in the most recent _GI Huddle_ meet, _NJ Slots Online_ plunked down for a top to bottom QA with Harry von Behr, methodology and business advancement chief at Spotlight Sports Group. 
+
+Focusing explicitly on offshoot tasks in the US, the executive talks us through the distinctions in content among US and European markets. 
+
+Von Behr likewise talks about Spotlight Sports Group&#8217;s arrangements in the US (previously Racing Post Group) just as how different partners and administrators might be moving toward the diverse state markets inside the country. 
+
+Click play on the video beneath to watch what the executive needed to state, while you can discover the remainder of our _GI Huddle_ interviews <a href="https://www.youtube.com/watch?v=Kt4DVketNY8" rel="noopener noreferrer" target="_blank">here </a>. 
+
+<iframe loading="lazy" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Kt4DVketNY8" width="560" />

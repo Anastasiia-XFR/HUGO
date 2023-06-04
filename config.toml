@@ -1,31 +1,29 @@
-################################# Default configuration ###################
-#baseURL = "https://examplesite.com"
+######################## default configuration ####################
 baseURL = "/"
-title = "Главная"
-
-meta_title = "Прогнозы на спорт, ставки и обзоры букмекерских контор"
+title = ""
 # post pagination
-paginate = "8"
+paginate = "12"
 # post excerpt
-summaryLength = "30"
+summaryLength = "10"
 # disqus short name
 disqusShortname = "" # get your shortname form here : https://disqus.com
 # disable language
-defaultContentLanguage = "en"
-disableLanguages = ["ru"]
+disableLanguages = [] # desable language from here
 
+[outputs]
+home = ["HTML", "RSS", "JSON"]
 
-#################################### Plugins ##############################
+############################# Plugins ##############################
 
 # CSS Plugins
 [[params.plugins.css]]
 link = "plugins/bootstrap/bootstrap.min.css"
 [[params.plugins.css]]
-link = "plugins/simplelineicons/css/simple-line-icons.css"
+link = "plugins/slick/slick.css"
 [[params.plugins.css]]
 link = "plugins/magnific-popup/magnific-popup.css"
 [[params.plugins.css]]
-link = "plugins/slick/slick.css"
+link = "plugins/themify-icons/themify-icons.css"
 
 # JS Plugins
 [[params.plugins.js]]
@@ -35,189 +33,275 @@ link = "plugins/bootstrap/bootstrap.min.js"
 [[params.plugins.js]]
 link = "plugins/slick/slick.min.js"
 [[params.plugins.js]]
-link = "plugins/magnific-popup/jquery.magnific-popup.min.js"
+link = "plugins/match-height/jquery.matchHeight-min.js"
 [[params.plugins.js]]
 link = "plugins/shuffle/shuffle.min.js"
 [[params.plugins.js]]
+link = "plugins/magnific-popup/jquery.magnific.popup.min.js"
+[[params.plugins.js]]
+link = "plugins/search/fuse.min.js"
+[[params.plugins.js]]
+link = "plugins/search/mark.js"
+[[params.plugins.js]]
+link = "plugins/search/search.js"
+[[params.plugins.js]]
 link = "plugins/google-map/gmap.js"
 
-  
 ############################## navigation ###############################
-
 # main menu
 [[menu.main]]
-name = "Рейтинг БК"
-URL = "ratings"
+name = "NJ Casinos"
+URL = "/"
 weight = 1
 
 [[menu.main]]
-name = "Прогнозы"
-URL = "prognozy"
+name = "Reviews"
+URL = "reviews"
 weight = 2
-hasChildren = true
-
-  [[menu.main]]
-  parent = "Прогнозы"
-  name = "Прогнозы на футбол"
-  URL = "prognozy-na-football"
-
-  [[menu.main]]
-  parent = "Прогнозы"
-  name = "Прогнозы на хоккей"
-  URL = "prognozy-na-hockey"
-  
-  [[menu.main]]
-  parent = "Прогнозы"
-  name = "Прогнозы на баскетбол"
-  URL = "prognozy-na-basketball"
 
 [[menu.main]]
-name = "Статьи"
-URL = "articles"
 weight = 3
+name = "Real money Casinos"
+URL = "real-money-casinos"
+
 
 [[menu.main]]
-name = "Новости"
-URL = "news"
+name = "Blacklist"
+URL = "blacklisted-casinos"
 weight = 4
 
 [[menu.main]]
+name = "Best casino games"
+URL = "best-casino-games"
 weight = 5
-name = "Бонусы БК"
-URL = "bonuses"
 
 [[menu.main]]
-name = "Ставки на спорт"
-URL = "stavki"
+name = "News"
+URL = "news"
 weight = 6
 
+[[menu.main]]
+name = "Betting"
+URL = "betting"
+weight = 7
 
 # footer menu
 [[menu.footer]]
-name = "Статьи"
-URL = "articles"
+name = "Latest News"
+URL = "/news/"
 weight = 1
 
 [[menu.footer]]
-name = "Ставки"
-URL = "stavki"
+name = "Betting"
+URL = "/betting/"
 weight = 2
 
 [[menu.footer]]
-name = "Бонусы"
-URL = "bonuses"
+name = "Casinos"
+URL = "/reviews/"
 weight = 3
 
 [[menu.footer]]
-name = "Прогнозы"
-URL = "prognozy"
+name = "Games"
+URL = "/best-casino-games/"
 weight = 4
 
 [[menu.footer]]
-name = "Рейтинг"
-URL = "ratings"
-weight = 5
-
-
-
+name = "Privacy Policy"
+URL = "/policy/"
+weight =0
 
 #################### default parameters ################################
 [params]
+tagsLimit = 15
 logo = "images/logo.png"
-logo_width = 150
-
+logo_w = "150"
+home = "Home"
 # Meta data
-description = " "
+description = "This is meta description"
 author = "xfr"
-domain = "bet-bro.com.ua"
-# Contact Information
-email_partners = "partners@bet-bro.com.ua"
-email = "info@bet-bro.com.ua"
-location = "Рильський провулок, 4, Київ, 01032"
+# contact info
+address = "JERSEY CITY, 111 TOWN SQUARE PL"
+mobile = "+201-210-3656"
+email = "slotso@nj.com"
 # contact form action
-contact_form_action = "mailer.php" # contact form works with : https://formspree.io
+contact_form_action = "#" # contact form works with https://formspree.io
 # Google Analitycs
-google_analitycs_id = "" # Your ID
+google_analitycs_id = "" # your id
+# search
+search = true
 
 # Preloader
 [params.preloader]
 enable = true
-preloader = "" # use .png , .svg or .gif format
+preloader = "" # use jpg, png, svg or gif format.
 
-# search
-[params.search]
+# Navigation button
+[params.navigation_button]
 enable = true
-
-# Navigation get start button
-[params.nav_button]
-enable = true
-label = "Get A Quote"
+label = "get a quote"
 link = "contact"
 
-
-[params.footer]
-	copyright = "Copyright &copy; 2020"
-	info = "[Политика конфиденциальности](/privacy/) Сайт не принимает ставки на спорт. <br> BetBro - это обзор лучших букмекерских контор."
-	links = [
-		["Карта сайта", "/sitemap/" ],
-		["Контакты", "/contacts/" ],
-		
-	]
-	
-
-
 # google map
-[params.gmap]
+[params.map]
 enable = true
-gmap_api = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"
-map_latitude = "50.454514"
-map_longitude = "30.515844"
+gmap_api = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"
+map_latitude = "51.5223477"
+map_longitude = "-0.1622023"
 map_marker = "images/marker.png"
 
-  
-############################# social site ########################
 
+###################### Clients logo slider ###############################
+[[params.clients_logo]]
+logo = "images/casino/888-casino.png"
+
+[[params.clients_logo]]
+logo = "images/casino/betfair.png"
+
+[[params.clients_logo]]
+logo = "images/casino/borgata.png"
+
+[[params.clients_logo]]
+logo = "images/casino/caesars.png"
+
+[[params.clients_logo]]
+logo = "images/casino/draft-kings.png"
+
+[[params.clients_logo]]
+logo = "images/casino/golden-nugget.png"
+
+[[params.clients_logo]]
+logo = "images/casino/hardrock.png"
+
+[[params.clients_logo]]
+logo = "images/casino/harrahs.png"
+
+[[params.clients_logo]]
+logo = "images/casino/mohegan-sun.png"
+
+[[params.clients_logo]]
+logo = "images/casino/ocean.png"
+
+[[params.clients_logo]]
+logo = "images/casino/pala.png"
+
+[[params.clients_logo]]
+logo = "images/casino/party.png"
+
+[[params.clients_logo]]
+logo = "images/casino/playmgm.png"
+
+[[params.clients_logo]]
+logo = "images/casino/pokerstars.png"
+
+[[params.clients_logo]]
+logo = "images/casino/resorts.png"
+
+[[params.clients_logo]]
+logo = "images/casino/scores.png"
+
+[[params.clients_logo]]
+logo = "images/casino/sugarhouse.png"
+
+[[params.clients_logo]]
+logo = "images/casino/tropicana.png"
+
+[[params.clients_logo]]
+logo = "images/casino/virgin.png"
+
+############################# social icon #################################
+[[params.social]]
+icon = "ti-facebook" # themify icon pack : https://themify.me/themify-icons
+link = "#"
 
 [[params.social]]
-icon = "icon-social-facebook"
-link = "https://www.facebook.com/betbro777"
+icon = "ti-twitter-alt" # themify icon pack : https://themify.me/themify-icons
+link = "#"
 
 [[params.social]]
-icon = "icon-social-instagram" 
-link = "https://www.instagram.com/betbro777/"
+icon = "ti-linkedin" # themify icon pack : https://themify.me/themify-icons
+link = "#"
 
 [[params.social]]
-icon = "icon-social-vkontakte" 
-link = "https://vk.com/betbrosport"
+icon = "ti-github" # themify icon pack : https://themify.me/themify-icons
+link = "#"
 
 [[params.social]]
-icon = "icon-paper-plane"
-link = "https://t.me/topfootynews"
+icon = "ti-instagram" # themify icon pack : https://themify.me/themify-icons
+link = "#"
 
-[[params.social]]
-icon = "icon-envelope-open" 
-link = "mailto:info@bet-bro.com.ua"
+################################### Top 5 Casinos New Jersey ################################### 
+[[params.top_casino]]
+title = "Virgin"
+img = "/images/casino/virgin.png"
+first_deposit_bonus = "100$"
+bonus = "30$"
+games = ["blackjack", "slots", "poker", "live-dealers"]
+features = ["Free spins", "1st Deposit bonus", "Community jackpot"]
+review = "/reviews/virgin-casino/"
+visit = "/reviews/virgin-casino/"
 
+[[params.top_casino]]
+title = "Slotman"
+img = "/images/casino/slotman.png"
 
+first_deposit_bonus = "1000$"
+bonus = "150$"
+games = ["blackjack", "slots", "poker", "live-dealers"]
+features = ["Free spins", "1st Deposit bonus", "Community jackpot"]
+review = "/reviews/slotman/"
+visit = "/reviews/slotman/"
 
+[[params.top_casino]]
+title = "Tropicana"
+img = "/images/casino/tropicana.png"
 
-################################ Ru Language ########################
-[Languages.ru]
-languageName = "Ru"
-languageCode = "ru-ru"
-contentDir = "content/ru"
-weight = 1
-home = "Главная"
+first_deposit_bonus = "100$"
+bonus = "20$"
+games = ["blackjack", "slots", "poker", "live-dealers"]
+features = ["Free spins", "1st Deposit bonus", "Community jackpot"]
+review = "/reviews/tropicana/"
+visit = "/reviews/tropicana/"
 
+[[params.top_casino]]
+title = "Golden Nugget"
+img = "/images/casino/golden-nugget.png"
 
+first_deposit_bonus = "1000$"
+bonus = "20$"
+games = ["blackjack", "slots", "poker", "live-dealers"]
+features = ["Sign up Bonus", "1st Deposit bonus", "24/7 Dealers"]
+review = "/reviews/golden-nugget/"
+visit = "/reviews/golden-nugget/"
 
-################################ En Language ########################
+[[params.top_casino]]
+title = "Betfair"
+img = "/images/casino/betfair.png"
+
+first_deposit_bonus = "2500$"
+bonus = "30$"
+games = ["blackjack", "slots", "poker", "live-dealers"]
+features = ["Sign up Bonus", "1st Deposit bonus", "A lot of games"]
+review = "/reviews/betfair/"
+visit = "/reviews/betfair/"
+
+################################### English language #####################################
 [Languages.en]
 languageName = "En"
 languageCode = "en-us"
 contentDir = "content/en"
+weight = 1
+home = "Home"
+# footer content
+footer_content = ""
+
+
+################################### French language #####################################
+[Languages.fr]
+languageName = "Fr"
+languageCode = "fr-fr"
+contentDir = "content/fr"
 weight = 2
-home = "Главная"
-
- 
-
+home = "Accueil"
+# footer content
+footer_content = ""
