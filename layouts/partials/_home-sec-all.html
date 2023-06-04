@@ -1,0 +1,18 @@
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+
+<section class="section section_all">
+   
+    <div class="container">
+        <div>
+        
+        {{ range $i, $arr := where .Site.RegularPages "Params.author" "!=" "Владимир Матвеев" }}
+            {{ if le $i 30 }}
+                {{- partial "_news_row.html" . -}}
+            {{ end }}
+        {{ end }}
+
+        </div>
+    </div>
+</section>
+
