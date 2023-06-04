@@ -1,29 +1,54 @@
-@mixin mobile-xs{
-  @media(max-width:400px){
-    @content;
-  }
-}
-@mixin mobile{
-  @media(max-width:575px){
-    @content;
-  }
-}
-@mixin tablet{
-  @media(max-width:767px){
-    @content;
-  }
-}
-@mixin desktop{
-  @media(max-width:991px){
-    @content;
-  }
-}
-@mixin desktop-lg{
-  @media(max-width:1200px){
-    @content;
-  }
+//Flex
+@mixin flex($flex: flex, $ai: center, $jc: center, $wrap: wrap) {
+  display: $flex;
+  flex-wrap: $wrap;
+  align-items: $ai;
+  justify-content: $jc;
 }
 
-@mixin size($size){
-  width: $size; height: $size;
+// Transition
+@mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
+  -webkit-transition: $what $time $how;
+  -moz-transition: $what $time $how;
+  -ms-transition: $what $time $how;
+  -o-transition: $what $time $how;
+  transition: $what $time $how;
+}
+
+// Transform
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+// translate
+@mixin translate ($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+// skew
+@mixin skew ($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+//transform origin
+@mixin transform-origin ($origin) {
+  moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  transform-origin: $origin;
 }

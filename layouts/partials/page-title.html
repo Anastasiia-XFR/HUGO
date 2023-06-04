@@ -1,14 +1,12 @@
-<!-- page-title -->
-<section class="page-title bg-cover {{ if eq .Params.type "geopolitics" }} bg-geopolitics {{ end }}" style="background-image: url('{{ .Params.bg_image | relURL }}'), url('{{`images/backgrounds/banner.jpg` | relURL }}');">
+<section class="page-title bg-2" style="background-image: url('{{.Params.Bg_image | absURL}}'), linear-gradient(#f1f1f1, transparent); background-repeat: {{.Params.bg_repeat}}; background-size: {{ .Params.bg_size }};">
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center text-white">
-        {{ if .Params.lead }} <p class="page-lead"> ({{ .Params.lead }}) </p> {{ end }}
-        <h1 class="">{{ .Title | markdownify }}</h1>
-        {{ if .Params.subtitle }} <h2 class="page-subtitle">{{ .Params.subtitle }}</h2>{{ end }}
-
+      <div class="col-md-12">
+        <div class="block">
+          <h1>{{ .Title }}</h1>
+          <p>{{ .Params.Description }}</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- /page-title -->

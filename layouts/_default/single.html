@@ -1,46 +1,48 @@
 {{ define "main" }}
-{{ partial "_breadcrumbs.html" . }}
-<section class="section-sm single">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
 
-        {{ if eq .Params.type "youtube" }}
-        {{ if .Params.video }}
+<section class="page-wrapper pt-0">
+	<div class="container">
+		{{ partial "_breadcrumbs.html" . }}
 
-        {{ if gt (len .Params.video) 8 }}
-        <iframe width="100%" height="315" src="{{ .Params.video | relURL }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        {{ end }}
-     
-        {{ end }}
-        {{ else }}
-        {{ if .Params.img }}
-        <img class="img-fluid w-auto mx-auto" src="{{ .Params.img | relURL }}" alt="{{ .Title }}">
-        {{ end }}
-        {{ end }}
+		<div class="row">
 
-        <h1 class="single__title">{{ .Title | upper | markdownify  }}</h1>
+			<div class="col-md-8">
+				<div class="post post-single">
+					<hgroup class="post-header">
+						<h2 class="post-title">{{ .Title }}</h2>
+						<div class="post-meta">
+							{{ .PublishDate.Format "2006-01-02 | 15:04"  }}
+						</div>
+					</hgroup>
+					<div class="post-thumb">
+						<nav class="post-cat-wrap">
+							{{ range $index, $elements:= .Params.Tags }}
+							{{ if ne $index 0 }} {{ end }}<a class="post-cat" href="{{ `tags/` | relLangURL }}{{ . | lower }}">{{ . | humanize }}</a>
+							{{ end }}
+						</nav>
+						<img class="img-responsive" src="{{ .Params.Image | relURL }}" alt="{{ .Title }}">
+					</div>
+					{{ if .Params.image_title }}
+					<div class="post-thumb-title">
+						{{ .Params.image_title }}
+					</div>
+					{{ end }}
 
-        <div class="single__meta"> 
-          {{ if .Params.author }}
-          <span class="">{{ .Params.author | title }}</span> 
-          {{ end }}
-         <div>
-          <span>{{ .PublishDate.Format "02.01.2006"  }} </span> / {{  .PublishDate.Format "15:04" }}
-        </div>
-         </div>
-        <div class="single__content">{{ .Content }}</div>
-
-        <!-- comments -->
-        {{ if .Site.DisqusShortname }}
-        <div class="mt-5">
-          {{ template "_internal/disqus.html" . }}
-        </div>
-        {{ end }}
-      </div>
-      {{ partial "blog-sidebar.html" . }}
-    </div>
-  </div>
+					<div class="post-content post-excerpt">
+						{{ .Content }}
+					</div>
+					
+					<div class="post-comments">
+						{{ template "_internal/disqus.html" . }}
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-4">
+				{{ partial "blog-sidebar.html" . }}
+			</div>
+		</div>
+	</div>
 </section>
 
 {{ end }}

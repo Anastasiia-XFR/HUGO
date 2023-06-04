@@ -8,102 +8,110 @@ function initialize() {
   var mapMarkerName = $('#map_canvas').attr('data-marker-name');
   var nottingham = new google.maps.LatLng(latitude, longitude);
   var style = [{
-      "featureType": "all",
-      "elementType": "labels.text.fill",
+      "featureType": "administrative",
+      "elementType": "all",
       "stylers": [{
-        "color": "#a8afbf"
+        "saturation": "-100"
       }]
     },
     {
-      "featureType": "all",
-      "elementType": "labels.text.stroke",
-      "stylers": [{
-          "visibility": "on"
-        },
-        {
-          "color": "#373d48"
-        },
-        {
-          "weight": 2
-        },
-        {
-          "gamma": "1"
-        }
-      ]
-    },
-    {
-      "featureType": "all",
-      "elementType": "labels.icon",
+      "featureType": "administrative.province",
+      "elementType": "all",
       "stylers": [{
         "visibility": "off"
       }]
     },
     {
-      "featureType": "administrative",
-      "elementType": "geometry",
-      "stylers": [{
-          "weight": 0.6
-        },
-        {
-          "color": "#4c576f"
-        },
-        {
-          "gamma": "0"
-        }
-      ]
-    },
-    {
       "featureType": "landscape",
-      "elementType": "geometry",
+      "elementType": "all",
       "stylers": [{
-          "color": "#424c65"
+          "saturation": -100
         },
         {
-          "gamma": "1"
+          "lightness": 65
         },
         {
-          "weight": "10"
+          "visibility": "on"
         }
       ]
     },
     {
       "featureType": "poi",
-      "elementType": "geometry",
+      "elementType": "all",
       "stylers": [{
-        "color": "#4c576f"
-      }]
-    },
-    {
-      "featureType": "poi.park",
-      "elementType": "geometry",
-      "stylers": [{
-        "color": "#424d66"
-      }]
-    },
-    {
-      "featureType": "road",
-      "elementType": "geometry",
-      "stylers": [{
-          "color": "#37425c"
+          "saturation": -100
         },
         {
-          "lightness": "0"
+          "lightness": "50"
+        },
+        {
+          "visibility": "simplified"
         }
       ]
     },
     {
-      "featureType": "transit",
-      "elementType": "geometry",
+      "featureType": "road",
+      "elementType": "all",
       "stylers": [{
-        "color": "#4c576f"
+        "saturation": "-100"
       }]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "all",
+      "stylers": [{
+        "visibility": "simplified"
+      }]
+    },
+    {
+      "featureType": "road.arterial",
+      "elementType": "all",
+      "stylers": [{
+        "lightness": "30"
+      }]
+    },
+    {
+      "featureType": "road.local",
+      "elementType": "all",
+      "stylers": [{
+        "lightness": "40"
+      }]
+    },
+    {
+      "featureType": "transit",
+      "elementType": "all",
+      "stylers": [{
+          "saturation": -100
+        },
+        {
+          "visibility": "simplified"
+        }
+      ]
     },
     {
       "featureType": "water",
       "elementType": "geometry",
       "stylers": [{
-        "color": "#2b364f"
-      }]
+          "hue": "#ffff00"
+        },
+        {
+          "lightness": -25
+        },
+        {
+          "saturation": -97
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels",
+      "stylers": [{
+          "lightness": -25
+        },
+        {
+          "saturation": -100
+        }
+      ]
     }
   ];
   var mapOptions = {
@@ -128,7 +136,7 @@ function initialize() {
   map.mapTypes.set('grey', mapType);
   map.setMapTypeId('grey');
   var marker_image = mapMarker;
-  var pinIcon = new google.maps.MarkerImage(marker_image, null, null, null, new google.maps.Size(46, 50));
+  var pinIcon = new google.maps.MarkerImage(marker_image, null, null, null, new google.maps.Size(30, 50));
   marker = new google.maps.Marker({
     position: nottingham,
     map: map,

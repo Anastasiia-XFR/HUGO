@@ -1,12 +1,8 @@
 ---
-title: "Статьи"
-title_before: ""
-titile_after: ""
+title: Cтатьи
+description: ТОП статьи от Bet-bro.com.ua
+bg_image: "/images/bg-2.png"
+bg_size: "contain"
+bg_repeat: "no-repeat"
 
-description : ""
-description_before: ""
-description_after: ""
-
-draft: false
 ---
-

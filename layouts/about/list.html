@@ -1,106 +1,125 @@
 {{ define "main" }}
 
-{{ $data := index .Site.Data .Site.Language.Lang }}
-
 {{ partial "page-title.html" . }}
 
-{{ partial "cta.html" . }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
 
-<!-- about company -->
-<section class="section bg-secondary-white">
+{{ if $data.about.about.enable }}
+{{ with $data.about.about }}
+<section class="about section">
   <div class="container">
-    <div class="row py-lg-5 py-3">
-      
-      <div class="col-md-6 pl-lg-4">
-        <div class="content mb-4">{{ .Content }}</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="about-img">
+          <img class="img-responsive" src="{{ .image | relURL }}">
+        </div>
       </div>
+      <div class="col-md-6">
+        <h2 class="mt-40">{{ .title | markdownify }}</h2>
+        {{ .content | markdownify }}
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | relURL }}" class="btn btn-small mt-20">{{ .label }}</a>
+        {{ end }}
+        {{ end }}
+      </div>
+    </div>
+    <div class="row counter-box text-center mt-50">
+      {{ range .funfacts }}
+      <div class="col-md-2">
+        <div class="counter-item">
+          <i class="{{ .icon }}"></i>
+          <h4 class="count" data-count="{{ .count }}">0</h4>
+          <span>{{ .name }}</span>
+        </div>
+      </div>
+      {{ end }}
     </div>
   </div>
 </section>
-<!-- /about company -->
+{{ end }}
+{{ end }}
 
-<!-- gallery -->
-{{ if $data.about.gallery.enable }}
-{{ with $data.about.gallery }}
-<section class="section bg-light">
+{{ if $data.about.features.enable }}
+{{ with $data.about.features }}
+<section class="about-feature bg-dark section dark-service">
   <div class="container">
+    {{ with .title }}
     <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      <div class="col-md-12">
+        <div class="title">
+          <h2>{{ . | markdownify }}</h2>
+        </div>
       </div>
     </div>
-    <div class="row shuffle-wrapper">
-      {{ range .gallery_item }}
-      {{ $column := .column }}
-      {{ if eq $column 1 }}
-      {{ $column = "col-lg-4 col-md-6" }}
-      {{ else if eq $column 2 }}
-      {{ $column = "col-lg-8" }}
-      {{ else if eq $column 3 }}
-      {{ $column = "col-12" }}
-      {{ else }}
-      {{ $column = "col-lg-4 col-md-6" }}
+    {{ end }}
+    <div class="row">
+      {{ range .feature_item }}
+      <div class="col-md-4">
+        <div class="service-item">
+          <i class="{{ .icon }}"></i>
+          <h4>{{ .name | markdownify }}</h4>
+          <p>{{ .content | markdownify }}</p>
+        </div>
+      </div>
       {{ end }}
-      <div class="{{$column}} shuffle-item">
-        <div class="gallery-item mb-4">
-          <div class="d-block">
-            <img src="{{ .image | relURL }}" alt="gallery-image" class="img-fluid w-100">
-            <div class="gallery-content bg-secondary d-flex align-items-center justify-content-center">
-              <div class="text-center">
-                <a class="d-inline-block p-3 popup-image" href="{{ .image | relURL }}"
-                  title="{{ .content | markdownify }}" data-effect="mfp-zoom-in"><i
-                    class="ti-fullscreen text-white"></i></a>
-                <div class="text-white content">{{ .content | markdownify }}</div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
+<section class="testimonial section-sm">
+  <div class="container">
+    <div class="row">
+      {{ if $data.about.testimonial.enable }}
+      <div class="col-md-6">
+        <div class="testimonial-carousel text-center">
+          <div class="testimonial-slider owl-carousel">
+            {{ range $data.homepage.funfacts.testimonial_slider }}
+            <div>
+              <i class="ion-quote"></i>
+              <p>"{{ .content | markdownify }}"</p>
+              <div class="user">
+                <img src="{{ .image | relURL }}" alt="client">
+                <p><span>{{ .name | markdownify }}</span> {{ .designation | markdownify }}</p>
               </div>
             </div>
+            {{ end }}
           </div>
         </div>
       </div>
       {{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-{{ end }}
-<!-- /gallery -->
 
-<!-- team -->
-{{ if $data.about.team.enable }}
-{{ with $data.about.team }}
-<section class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">{{ .title | markdownify }}</h2>
-      </div>
-      {{ range .team_member}}
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="card rounded-0 text-center hover-bg-secondary">
-          <div class="card-body pt-4">
-            <img src="{{ .image | relURL}}" alt="" class="img-sm mx-auto rounded-circle mb-4">
-            <h4 class="card-title">{{ .name | markdownify }}</h4>
-            <p class="h5 mb-0">{{ .designation | markdownify }}</p>
-            <a href="mailto:{{ .email }}">{{ .email }}</a>
-            <ul class="list-inline mt-3 mb-0">
-              {{ range .social }}
-              <li class="list-inline-item mx-2"><a href="{{ .link | safeURL }}"><i class="{{ .icon }}"></i></a></li>
-              {{ end }}
-            </ul>
+      {{ if $data.about.mission_vision.enable }}
+      {{ with $data.about.mission_vision }}
+      <div class="col-md-6">
+        <div class="tabCommon">
+          <ul class="nav nav-tabs">
+            {{ range $index, $elements := .tabs }}
+            <li {{ if eq $index 0}} class="active" {{ end }}><a href="#{{.name | urlize}}"
+                data-toggle="tab">{{.name}}</a></li>
+            {{ end }}
+          </ul>
+          <div class="tab-content">
+            {{ range $index, $elements := .tabs }}
+            <div id="{{.name | urlize}}" class="tab-pane fade {{ if eq $index 0}} active in {{ end }}">
+              <p>{{ .content | markdownify }}</p>
+            </div>
+            {{ end }}
           </div>
         </div>
       </div>
       {{ end }}
+      {{ end }}
     </div>
   </div>
 </section>
-{{ end }}
-{{ end }}
-<!-- /team -->
 
-<!-- clients -->
-{{ if $data.about.clients_logo.enable }}
-{{ partial "clients-logo-slider.html" . }}
+<!-- Call to action -->
+{{ if $data.about.cta.enable }}
+{{ partial "cta.html" . }}
 {{ end }}
-<!-- /clients -->
+<!-- /Call to action -->
 
 {{ end }}

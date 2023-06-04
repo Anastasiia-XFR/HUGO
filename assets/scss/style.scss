@@ -1,29 +1,61 @@
-/*!------------------------------------------------------------------
-[MAIN STYLESHEET]
+@import 'variables.scss';
 
-PROJECT:	Project Name
-VERSION:	Versoin Number
--------------------------------------------------------------------*/
+@import 'mixins.scss';
 
-/*------------------------------------------------------------------
-[TABLE OF CONTENTS]
--------------------------------------------------------------------*/
+@import 'media-query.scss';
 
-@import 'variables';
+@import 'typography.scss';
 
-@import 'mixins';
+@import 'common.scss';
 
-@import 'typography';
+@import 'main.scss';
 
-@import 'buttons';
+@import 'templates/_header.scss';
 
-@import 'common';
+@import 'templates/_navigation.scss';
 
-@import 'custom';
+@import 'templates/_slider.scss';
 
-@import 'preloader';
+@import 'templates/_call-to-action.scss';
 
+@import 'templates/_service.scss';
 
-@import 'templates/navigation';
+@import 'templates/_feature.scss';
 
-@import 'templates/homepage';
+@import 'templates/_portfolio.scss';
+
+@import 'templates/_testimonial.scss';
+
+@import 'templates/_contact.scss';
+
+@import 'templates/_pricing.scss';
+
+@import 'templates/_products.scss';
+
+@import 'templates/_single-product.scss';
+
+@import 'templates/_clients.scss';
+
+@import 'templates/_about.scss';
+
+@import 'templates/_instagram.scss';
+
+@import 'templates/_user-dashboard.scss';
+
+@import 'templates/_single-post.scss';
+
+@import 'templates/_backgrounds.scss';
+
+@import 'templates/_blog-sidebar.scss';
+
+@import 'templates/_blog.scss';
+
+@import 'templates/_coming-soon.scss';
+
+@import 'templates/_shopping.scss';
+
+@import 'templates/_404.scss';
+
+@import 'templates/_footer.scss';
+
+@import 'custom.scss';

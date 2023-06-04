@@ -1,12 +1,6 @@
 ---
-title: "O нас"
-title_before: ""
-titile_after: ""
-
-description : ""
-description_before: ""
-description_after: ""
-
+title: "About Our Company"
+description: "this is meta description"
 draft: false
+bg_image: "images/featue-bg.jpg"
 ---
-

@@ -1,13 +1,8 @@
 ---
-title: "Новости"
-title_before: ""
-titile_after: ""
-bg_image: "images/backgrounds/bg-news.jpg"
-
-description : ""
-description_before: ""
-description_after: ""
-
+title: "новости"
+description: "Самая новая информация от Bet-bro.com.ua"
 draft: false
+bg_image: "/images/bg-2.png"
+bg_size: "contain"
+bg_repeat: "no-repeat"
 ---
-
