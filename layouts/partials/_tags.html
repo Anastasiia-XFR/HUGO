@@ -1,0 +1,9 @@
+<!-- BEGIN tags -->
+{{ if .Params.tag }}
+<div class="flex flex-wrap ai-c jc-c mt-20">
+  {{ range .Params.tag }}
+  <a class="btn-gray-bd-sm" href="{{ . | urlize }}"> {{ . }}</a>
+  {{ end }}
+</div>
+{{ end }}
+<!-- END tags -->

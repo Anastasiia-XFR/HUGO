@@ -1,0 +1,106 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}"
+  class="block block-grid outer pb-0 {{ if or $section.title $section.subtitle }} has-header{{ end }}">
+  <div class="inner">
+    {{ if or $section.title $section.subtitle }}
+    <div class="block-header inner-sm">
+      {{ if $section.title }}
+      <h2 class="block-title">{{ $section.title }}</h2>
+      {{ end }}
+      {{ if $section.subtitle }}
+      <p class="block-subtitle">{{ $section.subtitle | safeHTML }}</p>
+      {{ end }}
+    </div>
+    {{ end }}
+
+
+    {{ $pagesGames := where .Site.RegularPages "Type" "game" }}
+    {{ $pagesBonuses := where .Site.RegularPages "Type" "bonus" }}
+    {{ $pagesCasinos := where .Site.RegularPages "Type" "casino" }}
+
+    {{ if $section.grid_items }}
+    <div class="block-content">
+      <div class="hero-card  flex flex-wrap ai-c jc-c mx-auto">
+        {{ range $item := $section.grid_items }}
+        <div class="hero-card-item">
+          <div class="hero-card-item-inside">
+
+            <div class="flex flex-wrap jc-spb">
+              <div class="hero-card-item-inner">
+                <a href="{{ $item.title_url | relURL }}">
+
+
+                  {{ if $item.title }}
+                  <h3 class="hero-card-item-title">
+                    {{ $item.title | truncate 40 }}
+                  </h3>
+                  {{ end }}
+
+                  <p class="text-lg text-color mb-0">
+                    {{ if eq $item.type "game" }}
+                    <span id="counterGames">{{ len $pagesGames | truncate 5 }}</span>
+
+                    {{ else }}
+                    {{ if eq $item.type "bonus" }}
+                    <span id="counterBonuses">{{ len $pagesBonuses | truncate 5 }}</span>
+
+                    {{ else }}
+                    {{ if eq $item.type "casino" }}
+                    <span id="counterCasinos">{{ len $pagesCasinos  | truncate 5 }}</span>
+
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+                  </p>
+
+                  {{ if $item.actions }}
+                  {{ range  $item.actions  }}
+                  <span class="hero-card-item-button"> {{ .label }} </span>
+                  {{ end }}
+                  {{ end }}
+
+                </a>
+
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<script>
+  
+let start; 
+function Counter(counter, time){
+const el = document.getElementById(counter); 
+const final = parseInt(el.textContent, 10); 
+const duration = time; 
+
+const step = ts => {
+  if (!start) {
+    start = ts
+  }
+  let progress = (ts - start) / duration; 
+
+  el.textContent = Math.floor(progress * final) 
+  if (progress < 1) {
+    requestAnimationFrame(step); 
+  }
+}
+
+requestAnimationFrame(step);
+};
+
+Counter('counterGames', 2000);
+Counter('counterBonuses', 1500);
+Counter('counterCasinos', 1000);
+
+
+</script>

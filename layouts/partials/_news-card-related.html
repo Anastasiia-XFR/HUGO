@@ -1,0 +1,52 @@
+<!-- BEGIN casino card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+{{ $gap_mod := .gap_mod }}
+
+<div
+  class="post post-card {{ if $size }} w-{{ $size }} {{ end }} {{ if $gap }} mp-{{ $gap }} {{ else }} {{ if $gap_mod }} mp-1-{{ $gap_mod }}  {{ end }} {{ end }}">
+
+  <figure class="post-cover">
+
+
+    {{ $ratio := $post.Params.bg_ratio | or 2 }} 
+    
+    {{ $bg_color := $post.Params.bg_color }}
+    {{ $size := 100 }}
+
+    {{ $size2 := sub 100 $size }}
+    {{ partial "_picture.html" (dict "context" . "post" $post "size" $size "ratio" $ratio "bg_color" $bg_color ) }}
+
+
+
+  </figure>
+  <a href="{{ $post.RelPermalink }}">
+    <header class="post-header pt-20 pb-0 px-30">
+      <div class="post-meta mb-5">
+
+        {{ if  $post.Date }}
+        <small>
+          <time class="published"
+            datetime="{{  $post.Date | dateFormat "2006-01-02 15:04" }}">{{  $post.Date | dateFormat "January 02 / 2006 / 15:04" }}
+          </time>
+        </small>
+        {{ end }}
+
+      </div>
+      <h4 class="post-title mih-40 flex ai-c jc-c">
+        {{ $post.Params.title | truncate 40 }}
+      </h4>
+
+      {{ if $post.Params.excerpt }}
+      <p class="post-excerpt mt-15"><small>{{ $post.Params.excerpt | truncate 80 }}</small></p>
+      {{ end }}
+
+    </header>
+
+    <footer class="post-footer pb-20">
+      <span class="read-more-link py-0"> Read more </span>
+    </footer>
+  </a>
+</div>
+<!-- END casino card -->

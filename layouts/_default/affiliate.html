@@ -1,0 +1,114 @@
+{{ define "content" }}
+
+<!-- {{ partial "_hero.html" . }} -->
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner my-40">
+
+  <div class="block-header inner">
+    <div class="heading-group">
+      <div class="heading-main">
+        <i class="ti-crown"></i>
+        <h1 class="block-title block-title-sm d-inline-block"> {{ .Title | truncate 80 }} </h1>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="docs-content">
+    {{ $include_dict := dict "page" . "Site" .Site }}
+    <div class="">
+
+      <!-- BEGIN content -->
+      <div class="post-inside box mb-50">
+        {{ partial "_affiliate-tabs.html" . }}
+      </div>
+      <!-- END content -->
+
+      <div class="post-inside mb-50">
+        <div class="post-nav">
+          {{ partial "_prev-next.html" . }}
+          <div class="post-soc">
+            {{ .Scratch.Set "mode" "light" }}
+            {{ partial "_soc.html" . }}
+          </div>
+        </div>
+      </div>
+
+      <!-- BEGIN content -->
+      {{ if (.Content | or ( .Summary )) }}
+      <div class="post-inside box">
+
+
+        {{ partial "_show-more.html" . }}
+
+
+        {{ $root_docs_path := trim .Site.Data.doc_sections.root_docs_path "/" }}
+        {{ $current_page_url := trim .URL "/" }}
+        {{ if ne $root_docs_path $current_page_url }}
+        {{ $child_pages := (($.Site.GetPage "section" $current_page_url).Pages).ByWeight }}
+        {{ $child_count := $child_pages | len }}
+        {{ $has_children := cond (gt $child_count 0) true false }}
+        {{ if $has_children }}
+        <ul class="docs-section-items">
+          {{ range $child_page := $child_pages }}
+          <li class="docs-section-item"><a href="{{ $child_page.URL }}"
+              class="docs-item-link">{{ $child_page.Title }}<span class="icon-angle-right"
+                aria-hidden="true"></span></a></li>
+          {{ end }}
+        </ul>
+        {{ end }}
+        {{ end }}
+
+        <footer class="post-footer pb-0">
+          <hr>
+          {{ partial "_prev-next.html" . }}
+        </footer>
+      </div>
+      {{ end }}
+      <!-- END content -->
+
+      {{ partial "_tags.html" . }}
+
+
+      <!-- BEGIN related -->
+      <div class="my-50 text-center">
+        <h2> Related Affiliates: </h2>
+        <div class="post-related mx-n-1">
+          {{ $display_posts := ((.Site.GetPage "section" "/other/affiliates").Pages).ByDate.Reverse }}
+          {{ $post := uniq ($display_posts) }}
+          {{ $size := 23 }}
+          {{ $gap := 1 }}
+          {{ $gap_mod := 0 }}
+          {{ range $index, $post := $display_posts }}
+          {{if le $index 3 }}
+          {{ partial "_affiliate-card-related.html" (dict "context" . "post" $post  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+      <!-- END related -->
+
+      {{ partial "_subscribe-form.html" . }}
+
+      <!-- BEGIN comments -->
+      <div class="my-50">
+        <div class="heading-group">
+          <div class="heading-main">
+            <i class="ti-crown"></i>
+            <h2 class="block-title block-title-sm d-inline-block"> Comments </h2>
+          </div>
+        </div>
+        {{ partial "_comments.html" . }}
+      </div>
+      <!-- END comments -->
+    
+    </div>
+
+    {{ partial "_casino-sidebar.html" . }}
+
+
+  </div>
+</div>
+
+{{ end }}

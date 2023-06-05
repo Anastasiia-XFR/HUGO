@@ -1,0 +1,50 @@
+<!-- BEGIN casino card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+{{ $gap_mod := .gap_mod }}
+<div class="post post-card as-str {{ if $size }} w-{{ $size }} {{ end }} {{ if $gap }} mp-{{ $gap }} {{ else }} {{ if $gap_mod }} mp-1-{{ $gap_mod }}  {{ end }} {{ end }}">
+
+  {{ if $post.Params.feature }}
+  <figure class="post-cover">
+
+    {{ $ratio := .Params.bg_ratio }}
+    {{ $bg_color := .Params.bg_color }}
+    {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+
+    <figcaption class="post-info">
+      {{ if $post.Params.games }}
+      {{ range first 1 $post.Params.games }}
+      <a href="{{ $post.RelPermalink }}" class="btn-bg btn-sm"> {{ . | title | truncate 20 }} </a>
+      {{ end }}
+      {{ end }}
+
+      {{ if $post.Params.providers }}
+      <a href="{{ $post.RelPermalink }}" class="btn-bg btn-sm"> {{ $post.Params.providers | title | truncate 20 }} </a>
+      {{ end }}
+
+    </figcaption>
+  </figure>
+  {{ end }}
+
+  <a class="post-inner" href="{{ $post.RelPermalink }}">
+    <header class="post-header pb-10 px-20">
+      <div class="post-meta">
+        <small>
+          <time class="published" datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">
+            {{ $post.Date | dateFormat "Jan 02 / 2006 / 15:04" }}
+          </time>
+        </small>
+      </div>
+      <h4 class="post-title"> {{ $post.Params.title | truncate 45 }}
+      </h4>
+    </header>
+
+
+    <footer class="post-footer">
+      <span class="btn-gray"> Let's Play </span>
+    </footer>
+  </a>
+
+</div>
+<!-- END casino card -->

@@ -1,0 +1,507 @@
+/**
+ * Sections
+ */
+.block {
+  padding-top: 3em;
+  padding-bottom: 3em;
+
+  &:not(.block-hero) {
+    background-color: _palette(bg);
+  }
+
+  &:last-child {
+    padding-bottom: 3.75em;
+    padding-top: 0;
+  }
+
+  &-header {
+    margin-bottom: 1.5em;
+  }
+
+  &-title {
+    //font-size: 2.125em;
+    margin: 0;
+    text-align: inherit;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 0.1em;
+  }
+
+  &-subtitle {
+    margin-bottom: 0;
+    color: _palette(meta);
+    line-height: 1.5;
+
+    &:not(:first-child) {
+      margin-top: 0.5em;
+    }
+  }
+
+  &-text {
+    .grid-item {
+      &:only-child {
+        flex-basis: 100%;
+        max-width: 680px;
+        text-align: center;
+      }
+    }
+
+    .block-content {
+      font-size: 1.125em;
+    }
+  }
+
+  &-image {
+    flex-basis: 50%;
+    max-width: 50%;
+    margin-bottom: 1.875rem;
+  }
+
+  &-buttons {
+    a {
+      &:not(.button) {
+        border: 0;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &-body {
+    flex-basis: 50%;
+    max-width: 50%;
+
+    &:only-child {
+      .block-buttons {
+        justify-content: center;
+
+        a {
+          margin-left: 0.5em;
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+}
+
+.block-buttons,
+.grid-item-buttons {
+  @include flex(wrap, center, center, flex);
+  margin-bottom: 0.9375em;
+
+  a {
+    margin-bottom: 1em;
+    margin-right: 1em;
+  }
+}
+
+.has-gradient {
+  .block-title,
+  .block-subtitle,
+  .block-buttons a:not(.button) {
+    color: inherit;
+  }
+}
+
+/* CTA section */
+.block-cta {
+  .has-gradient {
+    border-radius: 5px;
+    padding: 3.75em 5% 1.875em;
+  }
+  .block {
+    &-title {
+      margin: 0;
+      font-size: 2em;
+      text-transform: initial;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+    &-header {
+      flex-basis: 66.666%;
+      max-width: 66.666%;
+      text-align: left;
+    }
+
+    &-subtitle {
+      font-size: 1.125em;
+    }
+
+    &-buttons {
+      a {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+      }
+    }
+  }
+}
+
+/* Grid section */
+.block-grid {
+  &:not(.has-header) {
+    background: 0;
+    padding-top: 0;
+  }
+
+  &-header {
+    margin-bottom: 2em;
+    text-align: center;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.875em;
+
+    &-inside {
+      flex-grow: 1;
+      padding-bottom: 0.25em;
+      background-color: $white;
+      border: 1px solid _palette(border);
+      border-radius: 3px;
+      box-shadow: 0px 1px 2px 0px rgba($black, 0.08);
+    }
+  }
+}
+
+.grid-item-image {
+  border-radius: 3px 3px 0 0;
+  display: block;
+  width: 100%;
+
+  img {
+    border-radius: 3px 3px 0 0;
+  }
+}
+
+.grid-item-title {
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+
+  &:first-child {
+    margin-top: 1.875rem;
+  }
+
+  a {
+    border: 0;
+    color: inherit;
+
+    &:hover,
+    &:focus {
+      color: _palette(meta);
+    }
+  }
+}
+
+.grid-item-content {
+  p {
+    margin-bottom: 1.5em;
+    font-size: 14px;
+  }
+}
+
+.grid-item-buttons {
+  a {
+    &:not(.button) {
+      border: 0;
+
+      &:after {
+        font-size: 1.125em;
+        content: "\2192";
+        line-height: 1.5;
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.grid-item-title,
+.grid-item-content,
+.grid-item-buttons {
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+}
+
+/* Hero Section */
+.block-hero {
+  color: $white;
+  padding-bottom: 7.5em;
+  padding-top: 3.75em;
+  position: relative;
+  text-align: center;
+
+  .inner-sm {
+    position: relative;
+  }
+
+  .block-header {
+    margin-bottom: 0.75em;
+  }
+
+  .block-title {
+    //font-size: 3em;
+    font-size: 1.6em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .block-content {
+    font-size: 1.25em;
+    line-height: 1.5;
+  }
+
+  .block-buttons {
+    justify-content: center;
+
+    a {
+      font-size: 1em;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
+  }
+
+  & + .block {
+    margin-top: -5em;
+    position: relative;
+  }
+}
+
+@media only screen and (min-width: 1001px) {
+  .block-image {
+    &:not(:only-child) {
+      padding-right: 45px;
+    }
+  }
+
+  .grid-swap {
+    .block-image {
+      &:not(:only-child) {
+        padding-left: 45px;
+        padding-right: 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .block-grid {
+    .grid-item {
+      margin-bottom: 3vw;
+    }
+
+    .grid-item-title,
+    .grid-item-content,
+    .grid-item-buttons {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .block-cta {
+    .has-gradient {
+      padding-left: 3vw;
+      padding-right: 3vw;
+    }
+  }
+
+  .block-cta,
+  .block-text {
+    .grid-item {
+      flex-basis: 100%;
+      max-width: 680px;
+      text-align: center;
+    }
+
+    .block-buttons {
+      justify-content: center;
+
+      a {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $md) {
+  .block-title {
+    font-size: 17px;
+
+    .block-hero & {
+      font-size: 1.7em;
+    }
+
+    .block-cta & {
+      font-size: 1.4em;
+      margin-bottom: 17px;
+    }
+  }
+
+  @media only screen and (max-width: $sm) {
+    .block-title {
+      font-size: 1em;
+
+      .block-hero & {
+        font-size: 1.4em;
+      }
+    }
+  }
+
+  .block-hero {
+    .block-content {
+      font-size: 1.125em;
+    }
+
+    .block-buttons {
+      a {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .block-text {
+    .block-content {
+      font-size: 1em;
+    }
+  }
+}
+
+.card {
+  &-row {
+    @include flex(wrap, stretch, flex-start, flex);
+    box-sizing: border-box;
+
+    background-color: $white;
+    border: 0;
+    box-shadow: $bxsd;
+
+    padding: 0;
+
+    // height: 80px;
+    // overflow: hidden;
+
+    &-header,
+    &-footer {
+      align-self: center;
+    }
+    &-header {
+      padding: 30px 5%;
+    }
+    &-footer {
+      padding: 0 16px;
+
+      [class*="btn"] {
+        width: 100%;
+        display: block;
+        margin: 4px;
+      }
+    }
+
+    &-title {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      line-height: 1.3;
+      &-sm {
+        font-size: 12px;
+        line-height: 1.4;
+      }
+    }
+    @media only screen and (max-width: $md) {
+      &-title {
+        font-size: 0.8em;
+      }
+    }
+    @media only screen and (max-width: $xs) {
+      &-title {
+        font-size: 12px;
+      }
+      [class*="btn"] {
+        margin: 1px;
+      }
+    }
+  }
+}
+
+.hero-card {
+  @include flex(wrap, center, space-between, flex);
+
+  max-width: 950px;
+  width: 100%;
+
+  &-item {
+    //min-width: 250px;
+    width: 31%;
+    margin: 1%;
+    min-width: 250px;
+
+    padding: 2em;
+
+    background-color: $white;
+    border-radius: $brs;
+    box-shadow: $bxsd;
+
+    &-inner {
+      width: 100%;
+      text-align: center;
+    }
+
+    &-title {
+      margin-bottom: 5px;
+      font-size: 1.1em;
+      line-height: 1.2;
+    }
+
+    &-button {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      color: $main;
+      font-weight: bold;
+    }
+  }
+}
+
+@media only screen and (max-width: $xs) {
+  .hero-card-item {
+    min-width: 250px;
+  }
+}
+
+
+.card-inline {
+  display: flex ;
+  border: 1px dashed #ccc ;
+  border-width: 0px 0 1px ;
+  padding: 10px 0;
+
+  &-meta {
+    font-size: 10px;
+  }
+
+  &-text {
+    margin-bottom: 0;
+    text-transform: initial;
+    font-weight: normal;
+    line-height: 1.2;
+  }
+
+  h4.card-inline-title {
+    font-size: 11px;
+    line-height: 1.1;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  
+  &:last-child {
+    border-bottom: none ;
+    padding-bottom: 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+}

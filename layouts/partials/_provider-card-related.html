@@ -1,0 +1,47 @@
+<!-- BEGIN casino card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+{{ $gap_mod := .gap_mod }}
+<div  class="post post-card {{ if $size }} w-{{ $size }}  {{ end }} {{ if $gap }} mp-{{ $gap }} {{ else }} {{ if $gap_mod }} mp-1-{{ $gap_mod }}  {{ end }} {{ end }}">
+  
+  <a  class="post-inner mih-100" href="{{ $post.RelPermalink }}">
+    <header class="post-header py-10">
+     
+      <div class="post-meta">
+
+        {{ if $post.Date }}
+        <small>
+          <time class="published" datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">
+            {{ $post.Date | dateFormat "Jan 02 / 2006 / 15:04" }}
+          </time>
+        </small>
+        {{ end }}
+
+      </div>
+     
+      <h4 class="post-title mih-20"> 
+        {{ $post.Params.title | truncate 20 }}
+      </h4>
+
+     
+    </header>
+
+  </a>
+  <footer class="post-footer">
+  
+     <div>
+        <p class="mb-15">
+          {{ if $post.Params.site }}
+          <a class="btn-link" href="{{ $post.Params.site}}"> {{ $post.Params.site}} </a>
+          {{ end }}
+        </p>
+    
+         <a class="btn-gray" href="{{ $post.RelPermalink }}"> Review </a>
+     </div>
+
+  </footer>
+
+
+</div>
+<!-- END casino card -->

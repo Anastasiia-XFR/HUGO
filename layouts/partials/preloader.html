@@ -1,20 +1,12 @@
-{{ if .Site.Params.preloader.enable }} 
+{{ if .Site.Params.preloader.enable }}
 {{ "<!-- preloader start -->" | safeHTML }}
 <div class="preloader">
-  <div class="preloader-dots">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+  {{ if ne .Site.Params.preloader.preloader "" }}
+  <div class="preloader-inner">
+  <div class="preloader-ellipsis">
+    <div></div><div></div><div></div><div></div></div>
   </div>
+  {{ end }}
 </div>
-
-
-<script>
-  var preloader = document.querySelector(".preloader");
-  setTimeout(() => {
-    preloader.style.display = "none";
-  }, 300);
-</script>
 {{ "<!-- preloader end -->" | safeHTML }}
 {{ end }}

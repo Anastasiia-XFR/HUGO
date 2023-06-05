@@ -1,0 +1,89 @@
+// Font.
+$font: (
+  primary: ("Proxima Nova", Helvetica, Arial, sans-serif),
+  monospace: (Monaco, courier, monospace)
+);
+
+// Palette.
+{{ $palette := (index .Site.Params.palettes .Site.Params.palette).sass }}
+$palette: (
+  primary:           #424b5f,
+  secondary:         #283040,
+  meta:              #67758d,
+  border:            #dee5ef,
+  bg:                #f7f9fb,
+  note:              #fcb41d,
+  important:         #fc381d,
+  bgLight:           #1d3652,
+  bgDark:            #12253b,
+  accent:            {{ $palette.accent1 }},
+  accent-alt:        {{ $palette.accent2 }},
+);
+
+$black: #000;
+$white: #fff;
+$bgDark: #12253b;
+$bgMain: #1d3652;
+$bgLight: #5177b6;
+$bgSecondary: #516a88;
+$bgPrimary: #5379b8;
+$main: darken(#63ba2a, 5%);
+
+$grad1: linear-gradient(45deg, #4e6785, #49617e);
+$color1: #9eb7d4;
+
+$brs: 4px;
+$bd: 1.5px solid $main;
+$bxsd: 0px 1px 2px 0px rgba(0, 0, 0, 0.08);
+$trs: all 0.4s ease-in-out;
+
+$bd2: 1px solid lighten($black, 90%);
+
+$spcer: 2.5em;
+
+$xlg: 1150px;
+$lg: 992px;
+$md: 768px;
+$sm: 576px;
+$xs: 420px;
+
+@import "imports/functions";
+
+
+@import "fontawesome.min.css";
+@import "brands.min.css";
+
+@import "imports/reset";
+@import "imports/general";
+@import "imports/icons";
+@import "imports/animations";
+@import "imports/structure";
+@import "imports/header";
+@import "imports/posts-pages";
+@import "imports/docs";
+@import "imports/sections";
+@import "imports/footer";
+@import "imports/preloader";
+
+
+@import "imports/text";
+@import "imports/btn";
+@import "imports/spacer";
+@import "imports/media";
+//@import "imports/prism";
+
+
+.bg-light, .block:not(.block-hero).bg-light {
+    background-color: $white;
+
+    .post.post-games {
+      background-color: lighten($black, 98%);
+      box-shadow: $bxsd;
+      border-bottom-color: lighten($black, 95%);;
+    }
+}
+
+.bg-gray {
+  background-color: lighten($black, 97%);
+  border: 1px solid lighten($black, 92%);
+}

@@ -1,0 +1,133 @@
+{{ define "content" }}
+
+<!-- {{ partial "_hero.html" . }} -->
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner my-50">
+  <div class="block-header inner">
+    <div class="heading-group">
+      <div class="heading-main">
+        <i class="ti-crown"></i>
+        <h1 class="block-title block-title-sm d-inline-block"> {{ .Title }} </h1>
+      </div>
+    </div>
+  </div>
+  <div class="docs-content">
+    {{ $include_dict := dict "page" . "Site" .Site }}
+    <div class="">
+
+      <!-- BEGIN content -->
+      {{ if (.Content | or ( .Summary )) }}
+      <div class="box mb-30 p-0">
+
+        {{ if .Params.feature }}
+        <figure class="post-cover">
+          <figcaption class="post-thumbnail m-0">
+
+            {{ $ratio := .Params.bg_ratio }}
+            {{ $bg_color := .Params.bg_color }}
+            {{ $post := . }}
+            {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+
+            {{ if .Params.site }}
+            <iframe scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="{{ .Params.site }}"></iframe>
+            {{ end }}
+          </figcaption>
+        </figure>
+        {{ end }}
+
+      </div>
+      {{ end }}
+      <!-- END content -->
+
+
+      <!-- BEGIN related -->
+      <div class="my-30 text-center">
+        <!-- <h2> Related Games: </h2> -->
+        <div class="post-related mx-n-1">
+          {{ $display_posts := ((.Site.GetPage "section" "/game").Pages).ByDate.Reverse }}
+          {{ $post := uniq ($display_posts) }}
+          {{ $size := 23 }}
+          {{ $gap := 1 }}
+          {{ $gap_mod := 0 }}
+          {{ range $index, $post := $display_posts }}
+          {{if le $index 3 }}
+          {{ partial "_game-card-related.html" (dict "context" . "post" $post  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+      <!-- END related -->
+
+      <div class="mb-30">
+        <div class="post-nav">
+          {{ partial "_prev-next.html" . }}
+          <div class="post-soc">
+            {{ .Scratch.Set "mode" "light" }}
+            {{ partial "_soc.html" . }}
+          </div>
+        </div>
+      </div>
+
+      <!-- BEGIN content -->
+      {{ if (.Content | or ( .Summary )) }}
+      <div class="box">
+        <div class="pb-18">
+          <h2>{{ .Params.title }}</h2>
+        </div>
+        <div class="">
+          {{ partial "_show-more.html" . }}
+
+
+          {{ $root_docs_path := trim .Site.Data.doc_sections.root_docs_path "/" }}
+          {{ $current_page_url := trim .URL "/" }}
+          {{ if ne $root_docs_path $current_page_url }}
+          {{ $child_pages := (($.Site.GetPage "section" $current_page_url).Pages).ByWeight }}
+          {{ $child_count := $child_pages | len }}
+          {{ $has_children := cond (gt $child_count 0) true false }}
+          {{ if $has_children }}
+          <ul class="docs-section-items">
+            {{ range $child_page := $child_pages }}
+            <li class="docs-section-item"><a href="{{ $child_page.URL }}"
+                class="docs-item-link">{{ $child_page.Title }}<span class="icon-angle-right"
+                  aria-hidden="true"></span></a></li>
+            {{ end }}
+          </ul>
+          {{ end }}
+          {{ end }}
+        </div>
+
+        <div class="post-footer pb-0">
+          <hr>
+          {{ partial "_prev-next.html" . }}
+        </div>
+      </div>
+      {{ end }}
+      <!-- END content -->
+
+      {{ partial "_tags.html" . }}
+
+
+
+      {{ partial "_subscribe-form.html" . }}
+
+      <!-- BEGIN comments -->
+      <div class="my-30">
+        <div class="heading-group">
+          <div class="heading-main">
+            <i class="ti-crown"></i>
+            <h2 class="block-title block-title-sm d-inline-block"> Comments </h2>
+          </div>
+        </div>
+        {{ partial "_comments.html" . }}
+      </div>
+      <!-- END comments -->
+
+    </div>
+    {{ partial "_casino-sidebar.html" . }}
+
+  </div>
+</div>
+
+{{ end }}

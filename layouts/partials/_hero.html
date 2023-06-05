@@ -1,9 +1,15 @@
-{{ $data := index .Site.Data .Site.Language.Lang }}
+<!-- BEGIN hero -->
+<header class="page-header has-gradient px-10 py-80">
+	<!-- {{ if .Params.bg_image }}
+	<div class="bg-img" style="background-image: url('{{ $.Params.bg_image | relURL }}')"></div>
+	{{ end }} -->
+	<div class="inner-sm">
+	  <h1 class="page-title mb-0">{{ .Params.title | truncate 80 }}</h1>
+	  {{ if .Params.subtitle }}
+	  <p class="page-subtitle mt-10">{{ $.Params.subtitle | truncate 150 }}</p>
+	  {{ end }}
+	</div>
+  </header>
 
-{{ if $data.homepage.hero }}
-{{ with $data.homepage.hero }}
+<!-- END hero -->
 
-
-
-{{ end }}
-{{ end }}

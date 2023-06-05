@@ -1,0 +1,77 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner outer">
+  <div class="docs-content my-100">
+    <div class="post type-docs">
+      <div class="post-inside box ">
+
+        {{ $faqCategories := slice }}
+        {{ range .Site.Data.faq.faq.faqItem }}
+        {{ if .category }}
+        {{  $faqCategories = uniq ( $faqCategories | append .category ) | sort }}
+        {{ end }}
+        {{ end }}
+
+
+        <div class="faq">
+          {{ range $i, $el := $faqCategories  }}
+          {{ $currentCat := . }}
+
+          <div class="faq-inner">
+            <div class="faq-header">
+              <b> {{ $i | add 1 }}.</b>&nbsp; {{ . }}
+            </div>
+
+            {{ range $i, $el := $.Site.Data.faq.faq.faqItem }}
+
+            {{ if (in .category $currentCat) }}
+            <dl class="faq-content">
+              <dt class="faq-term">
+                <div class="faq-term-title"> <b class="mr-15"> Q </b>
+                  <h2> {{ .question }} </h2>
+                </div>
+                <i class="ti-angle-right"></i>
+              </dt>
+              <dd class="faq-definition">
+                {{ .answer }}
+              </dd>
+            </dl>
+            {{ end }}
+
+            {{ end }}
+          </div>
+
+          {{ end }}
+        </div>
+
+      </div>
+
+      {{ partial "_tags.html" . }}
+
+      {{ partial "_subscribe-form.html" . }}
+
+      <!-- BEGIN comments -->
+      <div class="my-50">
+        <div class="heading-group">
+          <div class="heading-main">
+            <i class="ti-crown"></i>
+            <h2 class="block-title block-title-sm d-inline-block"> Comments </h2>
+          </div>
+        </div>
+        {{ partial "_comments.html" . }}
+      </div>
+      <!-- END comments -->
+
+
+    </div>
+
+    {{ partial "_casino-sidebar.html" . }}
+
+  </div>
+</div>
+
+{{ end }}

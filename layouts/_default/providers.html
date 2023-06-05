@@ -1,0 +1,44 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+
+<div class="inner outer">
+  <div class="pt-50 mxp-1">
+    {{ partial "_search.html" . }}
+  </div>
+
+  <div class="post-feed my-30">
+    {{ $display_posts := ((.Site.GetPage "section" "/other/providers").Pages).ByDate.Reverse }}
+
+    {{ $paginator := .Paginate $display_posts }}
+
+    {{ range $post := $paginator.Pages }}
+    <div class="post w-23 text-center mp-1">
+
+      {{ $ratio := $post.Params.bg_ratio }}
+      {{ $bg_color := $post.Params.bg_color }}
+      {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+
+      <a class="post-inner mih-70 pt-10" href="{{ $post.RelPermalink }}">
+        <header class="post-header py-0">
+          <p class="post-title">
+            {{ $post.Params.title | truncate 35 }}
+          </p>
+        </header>
+      </a>
+      <a class="post-footer" href="{{ $post.RelPermalink }}">
+        <span class="btn-bd btn-sm"> More Info </span>
+      </a>
+    </div>
+    {{ end }}
+  </div>
+  <div class="mb-50 mt-30">
+    {{ partial "pagination.html" . }}
+  </div>
+
+</div>
+
+{{ end }}

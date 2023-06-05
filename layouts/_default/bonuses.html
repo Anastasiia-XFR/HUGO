@@ -1,0 +1,31 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner">
+  <div class="pt-50 mxp-1">
+    {{ partial "_search.html" . }}
+  </div>
+
+
+  <div class="post-feed my-30">
+    {{ $display_posts := ((.Site.GetPage "section" "/bonus").Pages).ByDate.Reverse }}
+    {{ $paginator := .Paginate $display_posts }}
+    {{ $size := 31 }}
+    {{ $gap_mod := 16 }}
+    {{ $gap := 0 }}
+    {{ range $post := $paginator.Pages }}
+    {{ partial "_bonus-card-main.html" (dict "context" . "post" $post "size" $size "gap_mod" $gap_mod "gap" $gap ) }}
+    {{ end }}
+  </div>
+
+  <!-- Pagination TBD -->
+  <div class="mb-50 mt-30">
+    {{ partial "pagination.html" . }}
+  </div>
+
+</div>
+
+{{ end }}

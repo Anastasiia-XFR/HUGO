@@ -1,0 +1,261 @@
+<!-- BEGIN casino card -->
+<div class="tabs">
+  <header class="tabs-nav">
+    <button class="tabs-toggle active">
+      DETAILS
+    </button>
+    <button class="tabs-toggle">
+      More Details
+    </button>
+
+    <!-- {{ if (.Params.good | or (.Params.bad)) }}
+
+    <button class="tabs-toggle">
+      Benefits & Negatives
+    </button>
+
+    {{ end }} -->
+
+  </header>
+  <div class="tabs-content">
+    <section class="tabs-block">
+
+      <!-- BEGIN table -->
+      <div class="table">
+        {{ if .Params.site }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-unlink"></small> Site: </div>
+          <div class="table-col"> <a
+              href="{{ .Params.site  }}?ref={{ .Site.BaseURL }}">{{ .Params.site | truncate 50 }}</a> </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.providers }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-game"></small> Providers: </div>
+          <div class="table-col">
+            {{ range first 100 .Params.providers }}
+            {{ . | title }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.deposit }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-wallet"></small> Deposit: </div>
+          <div class="table-col">
+            {{ $pmd := uniq (.Params.deposit) | sort }}
+            {{ range first 100 $pmd }}
+            {{ . | title }};
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.withdrawals }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-money"></small> Withdrawals: </div>
+          <div class="table-col">
+            {{ $pmw := uniq (.Params.withdrawals) | sort }}
+            {{ range first 100 $pmw }}
+            {{ . | title }};
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-credit-card"></small> Min. Deposit: </div>
+          <div class="table-col">
+            {{ if .Params.min_dep }}
+            {{ range first 100 .Params.min_dep }}
+            {{ . | title }};
+            {{ end }}
+            {{ else }}
+            No Information about it Now
+            {{ end }}
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-mobile"></small> Mobile Gambling: </div>
+          <div class="table-col">
+            {{ if .Params.mob_gambling }}
+            {{ .Params.mob_gambling }}
+            {{ else }}
+            No Information about it Now
+            {{ end }}
+          </div>
+        </div>
+
+
+        {{ if .Params.languages }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-world"></small> Languages: </div>
+          <div class="table-col">
+            {{ range  first 100 .Params.languages  }}
+            {{ . | title }};
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.support }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-headphone-alt"></small> Support: </div>
+          <div class="table-col"> <a href="{{ .Params.support }}"> {{ .Params.support | truncate 50  }} </a> </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.affiliates }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-wheelchair"></small> Affiliate: </div>
+          <div class="table-col"> <a href="{{ .Params.affiliates }}">{{ .Params.affiliates }}</a> </div>
+        </div>
+        {{ end }}
+
+
+      </div>
+      <!-- END table -->
+
+    </section>
+    <sectiob class="tabs-block">
+
+      <!-- BEGIN table -->
+      <div class="table">
+
+        {{ if .Params.casinos }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-settings"></small> Type: </div>
+          <div class="table-col"> {{ range .Params.casinos  }} {{ . | truncate 80 }} {{  end }} </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.owner }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-crown"></small> Owner: </div>
+          <div class="table-col"> {{ .Params.owner | truncate 50 }} </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.established }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-alarm-clock"></small> Established: </div>
+          <div class="table-col"> {{ .Params.established | truncate 50 }} </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.licences }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-bag"></small> Licences: </div>
+          <div class="table-col">
+            {{ range first 100 .Params.licences }}
+            {{ . | truncate 100 }};
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.geo_resrticted }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-na"></small> Restricted Geo: </div>
+          <div class="table-col">
+
+            {{ range first 100 .Params.geo_resrticted  }}
+            {{ . | title }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.currencies }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> <small class="icon ti-money"></small> Currencies: </div>
+          <div class="table-col">
+            {{ $crnc := uniq (.Params.currencies) | sort }}
+            {{ range first 100 $crnc }}
+            {{ . | title }}
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+
+
+
+
+      </div>
+      <!-- END table -->
+    </sectiob>
+
+    <!-- {{ if (.Params.good | or (.Params.bad)) }}
+
+    <section class="tabs-block">
+
+
+      {{ if .Params.logo }}
+      <div class="table-row">
+        <div class="table-col">
+          <picture class="post-logo">
+            {{ range $index, $el := .Params.logo }}
+            {{ if eq $index 1 }}
+            <source srcset="{{ . | relURL }}" type="image/webp">
+            {{ end }}
+            {{ if eq $index 0 }}
+            <img src="{{ . | relURL }}" alt="{{ $.Params.title }}">
+            {{ end }}
+            {{ end }}
+          </picture>
+        </div>
+      </div>
+      {{ end }}
+
+
+      {{ if .Params.good }}
+      <div class="table-row">
+        <div class="table-col table-col-heading"> Good: </div>
+      </div>
+
+      <div class="table-row as-fs">
+        <div class="table-col">
+          <ul>
+            {{ range .Params.good }}
+            <li> {{ . | truncate 200 }} </li>
+            {{ end }}
+          </ul>
+
+        </div>
+      </div>
+      {{ end }}
+
+      {{ if .Params.bad }}
+      <div class="table-row">
+        <div class="table-col table-col-heading"> Bad: </div>
+      </div>
+
+      <div class="table-row">
+        <div class="table-col">
+          <ul>
+            {{ range .Params.bad }}
+            <li> {{ . | truncate 200 }} </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      {{ end }}
+
+
+    </section>
+    {{ end }} -->
+
+  </div>
+</div>
+<!-- END casino card -->

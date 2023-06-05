@@ -1,0 +1,20 @@
+ <!-- BEGIN subscribe -->
+ <div class="box box-subscribe my-50">
+
+  <h2>
+    Subscribe for new bonuses/casinos/games/etc
+  </h2>
+  <div class="flex flex-wrap ai-c jc-spb">
+    <div class="post-soc">
+      {{ .Scratch.Set "mode" "gradient" }}
+      {{ partial "_soc.html" . }}
+    </div>
+    <form method="POST" action="#" class="form-subscribe">
+      <label class="flex-wrap">
+        <input type="email" placeholder="your@email.com" maxlength="64" minlength="2" required>
+        <button type="submit"> Subscribe </button>
+      </label>
+    </form>
+  </div>
+</div>
+<!-- END subscribe -->

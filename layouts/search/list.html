@@ -1,23 +1,79 @@
-{{ define "main" }}
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
 
 
+<div class="pg-affiliate">
 
-<section class="section page__wrap">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div id="search-results"></div>
-        <script id="search-result-template" type="text/x-js-template">
-          <div class="py-4 border-bottom" id="summary-${key}">
-            <h4><a href="${link}">${title}</a></h4>
-            <p>${snippet}</p>
-            <!-- ${ isset tags }<p>Tags: ${tags}</p>${ end }
-            ${ isset categories }<p>Categories: ${categories}</p>${ end } -->
-          </div>
-        </script>
+  {{ partial "_hero.html" . }}
+  {{ partial "breadcrumbs.html" . }}
+
+
+  <article class="inner py-60">
+
+    <section class="pb-20 mxp-1">
+      {{ partial "_search.html" . }}
+    </section>
+
+    <section class="flex flex-wrap text-center" id="search-results"></section>
+
+    <script id="search-result-template" type="text/x-js-template">
+
+      <article class="post post-card w-23 mp-1" id="summary-${key}">
+      <a href="${link}">
+        <div class="post-inner">
+        <header class="post-header">
+        <h4 class="post-title pb-20"> ${title} </h4>
+        <p class="post-excerpt"> ${snippet} </p>
+        
+        ${ isset tags }<p> <small> Tags: ${tags} </small> </p>${ end }
+        ${ isset categories }<p> <small> Categories: ${categories} </small> </p>${ end }
+
+       </header>
       </div>
-    </div>
-  </div>
-</section>
+       <footer class="post-footer">
+        <button class="read-more-link p-0"> Read More </button>
+       </footer>
+      </a>
+      </article>
 
+    </script>
+
+    {{ partial "_back-home.html" }}
+
+
+    {{ $section := .Params.sections }}
+    <section id="{{ $section.section_id }}" class="block block-grid  mt-50">
+      <div class="inner">
+
+        <div class="heading-group mxp-1">
+          <hgroup class="heading-main">
+            <i class="ti-star"></i>
+            <h2 class="block-title d-inline-block"> TOP casinos </h2>
+          </hgroup>
+          <a class="read-more-link" href="{{ `/casino` | relURL }}"> All </a>
+
+        </div>
+
+        <div class="block-content">
+          <div class="flex flex-wrap jc-c">
+
+            {{ $display_posts := ((.Site.GetPage "section" "/casino").Pages).ByDate.Reverse }}
+
+            {{ $size := 31 }}
+            {{ $gap := 0 }}
+            {{ $gap_mod := 16 }}
+
+            {{ range $index, $post := $display_posts }}
+            {{if le $index 11 }}
+            {{ partial "_casino-card-main.html"  (dict "context" . "post" $post "size" $size "gap" "$gap" "gap_mod" $gap_mod) }}
+            {{ end }}
+            {{ end }}
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</div>
 {{ end }}

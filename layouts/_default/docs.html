@@ -1,0 +1,49 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner">
+  <div class="docs-content my-100">
+    {{ $include_dict := dict "page" . "Site" .Site }}
+    <div class="post type-docs my-0">
+      <div class="post-inside box">
+        <div class="">
+          <h2>{{ .Params.title }}</h2>
+        </div>
+        <div class="">
+          {{ .Content }}
+          {{ $root_docs_path := trim .Site.Data.doc_sections.root_docs_path "/" }}
+          {{ $current_page_url := trim .RelPermalink "/" }}
+          {{ if ne $root_docs_path $current_page_url }}
+          {{ $child_pages := (($.Site.GetPage "section" $current_page_url).Pages).ByWeight }}
+          {{ $child_count := $child_pages | len }}
+          {{ $has_children := cond (gt $child_count 0) true false }}
+          {{ if $has_children }}
+          <ul class="docs-section-items">
+            {{ range $child_page := $child_pages }}
+            <li class="docs-section-item"><a href="{{ $child_page.RelPermalink }}"
+                class="docs-item-link">{{ $child_page.Title }}<span class="icon-angle-right"
+                  aria-hidden="true"></span></a></li>
+            {{ end }}
+          </ul>
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+
+      
+      {{ partial "_tags.html" . }}
+
+      {{ partial "_subscribe-form.html" . }}
+
+
+
+    </div>
+    {{ partial "_casino-sidebar.html" . }}
+
+  </div>
+</div>
+
+{{ end }}

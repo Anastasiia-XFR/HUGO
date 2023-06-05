@@ -1,0 +1,54 @@
+<!-- BEGIN bonus card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap_mod := .gap_mod }}
+{{ $gap := .gap }}
+
+<div
+  class="post post-bonuses as-str {{ if $size }} w-{{ $size }} {{ end }} {{ if $gap_mod }} mp-1-{{ $gap_mod }} {{ end }}">
+  <a href="{{ $post.RelPermalink }}" class="post-wrap">
+
+    <div class="post-header">
+
+      <p class="post-title"> {{ $post.Params.title }} </p>
+      <div class="post-content">
+
+        {{ if $post.Params.percent }}
+        <b>{{ $post.Params.percent }}</b> Bonus
+        {{ end }}
+
+        {{ if $post.Params.bonus_val }}
+        {{ range $index, $el := $post.Params.bonus_val }}
+        {{ if eq $index 0 }}
+        up to <b>{{ .val }} {{ .currency }}</b>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+
+        {{ if $post.Params.fs }}
+        + <b>{{ $post.Params.fs }} FS </b>
+        {{ end }}
+
+        {{ if $post.Params.promocode }}
+        / PC: <b class="text-color">{{ $post.Params.promocode }}</b>
+        {{ end }}
+
+      </div>
+    </div>
+
+    <div class="post-footer">
+      {{ if $post.Params.bonus }}
+      <span class="button button-bg-sm mr-5">
+        {{ $post.Params.bonus }}
+      </span>
+      {{ end }}
+      {{ if $post.Params.casinos }}
+      <span class="button button-bd-sm mr-5">
+        {{ $post.Params.casinos }}
+      </span>
+      {{ end }}
+    </div>
+
+  </a>
+</div>
+<!-- END bonus card -->

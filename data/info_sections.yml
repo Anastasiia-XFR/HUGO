@@ -1,0 +1,10 @@
+root_info_path: /info
+sections:
+  - about
+  - terms
+  - sitemap
+  - faq
+  - knowledge
+  - news
+
+ # - company

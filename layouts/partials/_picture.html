@@ -1,0 +1,38 @@
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $ratio := .ratio }}
+{{ $bg_color := .bg_color }}
+
+
+
+{{ if  $post.Params.feature  }}
+<a class="d-block {{ if $size }} w-{{ $size }} {{ end }}" href="{{ $post.RelPermalink }}">
+  <picture class="pic {{ if eq $ratio 1 }} pic-sqr {{ end }}" {{  if $bg_color }}
+    style="background-color: {{ $bg_color }};" {{ end }}>
+
+    {{ if ($post.Params.feature | or ($post.Params.logo)) }}
+    {{ $pic := ($post.Params.feature | or ($post.Params.logo)) }}
+    {{ range $index, $el := $pic }}
+    {{ if eq .type "WEBP" }}
+    <source srcset="{{ .src }}" type="image/webp">
+    {{ end }}
+    {{ if ne .type "PNG" }}
+    {{ if eq .type "JPG" }}
+    <img {{ if .src }}  src="{{ .src }}" {{ else }} src="http://lorempixel.com/400/200/" {{ end }} alt="{{ $post.Params.title  | truncate 20 }}">
+    {{ end }}
+    {{ else }}
+    {{ if eq .type "PNG" }}
+    <img {{ if .src }}  src="{{ .src }}" {{ else }} src="http://lorempixel.com/400/200/" {{ end }} alt="{{ $post.Params.title  | truncate 20 }}">
+    {{ end }}
+    {{ end }}
+    {{ end }}
+
+    {{ else }}
+
+   
+    {{ end }}
+
+  </picture>
+</a>
+
+{{ end }}

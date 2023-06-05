@@ -1,0 +1,182 @@
+.mx-auto
+        margin-left: auto
+        margin-right: auto
+.m-0
+        margin: 0 !important
+.mx-0
+        margin-left: 0 !important
+        margin-right: 0 !important
+.my-0
+        margin-top: 0 !important
+        margin-bottom: 0 !important
+.mb-0
+        margin-bottom: 0 !important
+.mt-0
+        margin-top: 0 !important
+
+.p-0    
+        padding: 0 !important
+.px-0
+        padding-left: 0 !important
+        padding-right: 0 !important
+.py-0
+        padding-top: 0 !important
+        padding-bottom: 0 !important
+.pb-0
+        padding-bottom: 0 !important
+.pt-0   
+        padding-top: 0 !important
+
+.mx-n
+        &-1-16
+                margin-left: -1.16%
+                margin-right: -1.16%      
+        &-1
+                margin-left:  -1%
+                margin-right: -1%
+        
+@for $i from 1 through 10
+        .mx-#{$i}0
+                margin-left: $i*10px
+                margin-right: $i*10px
+                
+        .my-#{$i}0
+                margin-top: $i * 10px
+                margin-bottom: $i * 10px
+        .ml-#{$i}0
+                margin-left: $i * 10px
+        .mr-#{$i}0
+                margin-right: $i * 10px
+        .mb-#{$i}0
+                margin-bottom: $i * 10px
+        .mt-#{$i}0
+                margin-top: $i * 10px
+       
+        .py-#{$i}0
+                padding-top: $i * 10px
+                padding-bottom: $i * 10px
+        .px-#{$i}0
+                padding-left: $i * 10px
+                padding-right: $i * 10px
+        .pl-#{$i}0
+                padding-left: $i * 10px
+        .pr-#{$i}0
+                padding-right: $i * 10px
+        .pt-#{$i}0
+                padding-top: $i * 10px
+        .pb-#{$i}0
+                padding-bottom: $i * 10px
+   
+
+@for $i from 0 through 50
+        .py-#{$i}
+                padding-top: $i * 1px
+                padding-bottom: $i * 1px
+        .px-#{$i}
+                padding-left: $i * 1px
+                padding-right: $i * 1px
+        .pb-#{$i}
+                padding-bottom: $i * 1px
+        .pt-#{$i}
+                padding-top: $i * 1px
+        .my-#{$i}
+                margin-top: $i * 1px
+                margin-bottom: $i * 1px
+        .mx-#{$i}
+                margin-left: $i*1px
+                margin-right: $i*1px
+        .ml-#{$i}
+                margin-left: $i * 1px
+        .mr-#{$i}
+                margin-right: $i * 1px
+        .mt-#{$i}
+                margin-top: $i * 1px
+        .mb-#{$i}
+                margin-bottom: $i * 1px
+
+@media only screen and (max-width: $lg)
+        // [class*=my]
+        //         margin-top: 2em
+        //         margin-bottom: 2em
+        // [class*=mb]
+        //         margin-bottom: 2em
+
+@for $i from 0 through 100
+        .mxp-#{$i}
+                margin-left: $i * 1%
+                margin-right: $i * 1%
+        .mp-#{$i}
+                margin: $i * 1%
+
+@for $i from 0 through 100
+        .mp-1-#{$i}
+                margin: $i * 1%/100 + 1
+
+.d-block
+        display: block
+        width: 100%
+
+.d-none
+        display: none
+.flex
+        display: flex
+        &-wrap
+                flex-wrap: wrap
+        &-nowrap
+                flex-wrap: nowrap
+
+  
+.jc 
+        &-c
+                justify-content: center
+        &-spb
+                justify-content: space-between
+        &-spa
+                justify-content: space-around
+        &-fs
+                justify-content: flex-start
+        &-fe
+                justify-content: flex-end
+
+.ai
+        &-c
+                align-items: center
+        &-str
+                align-items: stretch
+        &-fs
+                align-items: flex-start
+        &-fe
+                align-items: flex-end
+.as
+        &-str
+                align-self: stretch
+
+
+
+@for $i from 0 through 15
+        .mih-#{$i}0
+                min-height: $i * 10px
+
+@media only screen and (max-width: $sm)
+        [class*=mih]
+                min-height: auto
+
+.w-auto
+        width: auto
+
+@for $i from 0 through 100
+        .w-#{$i}
+                max-width: $i * 1%
+                width: 100%
+
+.post[class*="w-"], .card-row[class*="w-"]
+        @media only screen and (max-width: $xlg)
+                max-width: 31%    
+                margin: 1.16%
+        @media only screen and (max-width: $lg)
+                max-width: 48%
+                margin: 1% 
+        @media only screen and (max-width: $sm)
+                max-width: 100%
+
+    

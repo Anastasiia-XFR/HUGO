@@ -1,0 +1,134 @@
+<aside class="page-nav" id="page-nav">
+  <div class="page-nav-inside sticky" id="page-nav-inside">
+
+    <div class="box p-0">
+      <div class="box-header box-header-grad">
+        <small class="box-icon ti-star"></small>
+        <h4> About </h4>
+        <small class="box-icon ti-star"></small>
+      </div>
+      <div class="box-content">
+        <div id="page-nav-link-container"></div>
+      </div>
+    </div>
+
+    <div class="box p-0 my-30">
+      <div class="box-header collapsible active">
+        <small class="box-icon ti-gift"></small>
+        <h4> Other Casino Bonuses </h4>
+        <small class="box-icon ti-angle-down collapsible-toggle"></small>
+      </div>
+
+      <div class="box-content collapsible-content">
+        {{ $display_posts := ((.Site.GetPage "section" "/bonus").Pages).ByDate.Reverse }}
+        {{ $post := uniq ($display_posts) }}
+        {{ $size := 100 }}
+        {{ range $index, $post := $display_posts }}
+        {{if le $index 6 }}
+
+        <a href="{{ .Permalink }}" class="card-inline flex ai-c jc-spb">
+          <h4 class="card-inline-title"> {{  $post.Params.title | truncate 40 }} </h4>
+          <span href="{{ .Permalink }}" class="btn-gray btn-sm"> Review </span>
+        </a>
+
+
+        {{ end }}
+        {{ end }}
+
+      </div>
+
+      <div class="box-footer">
+        <a href="{{ `/bonus/` | relURL }}"> All Bonuses 
+        </a>
+      </div>
+    </div>
+
+    <div class="box p-0 my-30">
+      <div class="box-header collapsible">
+        <small class="box-icon ti-crown"></small>
+        <h4> MOST POPULAR CASINOS </h4>
+        <small class="box-icon collapsible-toggle ti-angle-down"></small>
+      </div>
+      <div class="box-content collapsible-content">
+        {{ $display_posts := ((.Site.GetPage "section" "/casino").Pages).ByDate.Reverse }}
+        {{ $post := uniq ($display_posts) }}
+        {{ $size := 100 }}
+        {{ range $index, $post := $display_posts }}
+        {{if le $index 10 }}
+
+        <a href="{{ .Permalink }}" class="card-inline flex ai-c jc-spb">
+          <h4 class="card-inline-title"> {{  $post.Params.title | truncate 40 }} </h4>
+          <span class="btn-gray btn-sm"> Review </span>
+        </a>
+
+
+        {{ end }}
+        {{ end }}
+
+      </div>
+
+      <div class="box-footer">
+        <a href="{{ `/casino/` | relURL }}"> All Casinos 
+        </a>
+      </div>
+
+    </div>
+
+    <div class="box p-0 my-30">
+      <div class="box-header collapsible">
+        <small class="box-icon ti-book mr-5"></small> 
+        <h4>Latest Casinos News </h4>
+        <small class="box-icon collapsible-toggle ti-angle-down"></small>
+      </div>
+      <div class="box-content collapsible-content">
+        {{ $display_posts := ((.Site.GetPage "section" "/info/news").Pages).ByDate.Reverse }}
+        {{ $post := uniq ($display_posts) }}
+
+        {{ $size := 23 }}
+        {{ $gap := 1 }}
+        {{ $gap_mod := 0 }}
+        {{ range $index, $post := $display_posts }}
+
+        {{ if gt $index 2 }}
+        {{ if (in $post.Params.categories "casino") | and (le $index 6) }}
+
+        <a class="card-inline flex-wrap" href={{ $post.Permalink }}>
+
+          {{ if  $post.Date }}
+          <div class="w-100">
+            <small class="card-inline-meta">
+              <time class="published"
+                datetime="{{  $post.Date | dateFormat "2006-01-02 15:04" }}">{{  $post.Date | dateFormat "January 02 / 2006 / 15:04" }}
+              </time>
+            </small>
+          </div>
+          {{ end }}
+
+          <div class="w-100">
+            <h4 class="card-inline-title"> {{ $post.Params.title | truncate 50 }} </h4>
+          </div>
+
+          {{ if $post.Params.excerpt }}
+          <div class="w-100">
+            <p class="card-inline-text mt-8"><small>{{ $post.Params.excerpt | truncate 80 }}</small></p>
+          </div>
+          {{ end }}
+
+        </a>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+
+      </div>
+
+      <div class="box-footer">
+        <a href="{{ `/info/news/` | relURL }}"> 
+          All News 
+        </a>
+      </div>
+
+    </div>
+
+
+  </div>
+</aside>

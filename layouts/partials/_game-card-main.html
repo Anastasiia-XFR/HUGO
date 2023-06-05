@@ -1,0 +1,48 @@
+<!-- BEGIN game card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+
+<div class="post post-games as-str {{ if $size }} w-{{ $size }} {{ else }}  w-23 {{ end }} ">
+
+  <figure class="post-cover">
+
+    {{ $ratio := $post.Params.bg_ratio }}
+    {{ $bg_color := $post.Params.bg_color }}
+    {{ $size := 100 }}
+    {{ partial "_picture.html" (dict "context" . "post" $post "size" $size "ratio" $ratio "bg_color" $bg_color ) }}
+
+
+    <figcaption class="post-info">
+      {{ if $post.Params.games }}
+      {{ range first 1 $post.Params.games }}
+      <a href="{{ $post.RelPermalink }}" class="btn-bg btn-sm">
+        {{ . | title | truncate 20 }}
+      </a>
+      {{ end }}
+      {{ end }}
+
+      {{ if $post.Params.providers }}
+      <a href="{{ $post.RelPermalink }}" class="btn-bg btn-sm">
+        {{ $post.Params.providers | title | truncate 20 }}
+      </a>
+      {{ end }}
+
+    </figcaption>
+  </figure>
+
+  <a href="{{ $post.RelPermalink }}">
+    <div class="post-inner">
+      <div class="post-header">
+        <!-- <div class="post-meta">
+      <time class="published"
+        datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">{{ $post.Date | dateFormat "January 02 / 2006 / 15:04" }}</time>
+    </div> -->
+        <h2 class="post-title"> {{ $post.Params.title }} </h2>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<!-- END game card -->

@@ -1,0 +1,41 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="block block-cta pt-0 pb-80">
+  <div class="inner">
+    <div class="has-gradient">
+      <div class="grid grid-middle grid-center">
+        <!-- {{ if or $section.title $section.subtitle }}
+        <div class="grid-item block-header">
+          {{ if $section.title }}
+          <h2 class="block-title">{{ $section.title }}</h2>
+          {{ end }}
+          {{ if $section.subtitle }}
+          <p class="block-subtitle">{{ $section.subtitle | safeHTML }}</p>
+          {{ end }}
+        </div>
+        {{ end }}
+        {{ if $section.actions }}
+        <div class="grid-item block-buttons">
+          {{ $include_dict := dict "actions" $section.actions }}
+          {{ partial "cta_buttons.html" $include_dict }}
+        </div>
+        {{ end }} -->
+
+        <div class="grid-item block-header">
+          <h2 class="block-title">
+            Subscribe for lates info
+          </h2>
+          
+          <p class="block-subtitle pb-15">
+            
+            Check when appear new bonuses, casinos, games and artilces...
+          </p>
+         
+        </div>
+        <div class="grid-item block-buttons">
+          <a href="#" class="button">Subscribe for newsletter</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

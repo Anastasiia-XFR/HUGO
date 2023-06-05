@@ -1,0 +1,242 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+        margin: 2.25rem 0 1.125rem;
+        color: _palette(secondary);
+        font-weight: bold;
+        font-size: 1em;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-rendering: optimizeLegibility;
+
+        &:first-of-type {
+                margin-top: 0;
+        }
+
+        @media only screen and (max-width: $sm) {
+                font-size: 0.9em;
+        }
+}
+
+p {
+        margin: 0 0 1.875em;
+        font-size: 15px;
+        line-height: 1.5;
+}
+
+address {
+        font-style: italic;
+        margin: 0 0 1.875em;
+}
+
+mark,
+ins {
+        padding: 0 3px;
+        background-color: lighten(_palette(note), 40%);
+        color: _palette(secondary);
+        text-decoration: none;
+}
+
+pre {
+        margin: 0 0 1.875rem;
+        padding: 1.5rem;
+        overflow: auto;
+        background-color: _palette(bg);
+        border-radius: 3px;
+        color: _palette(secondary);
+        font-family: _font(monospace);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+}
+
+:not(pre) > code {
+        padding: 0.1em;
+        background-color: _palette(bg);
+        border-radius: 3px;
+        font-size: 0.875rem;
+        white-space: normal;
+}
+
+blockquote {
+        margin: 1.5em 0;
+        padding-left: 1em;
+        border-left: 5px solid _palette(accent);
+        font-size: 1.5em;
+        line-height: 1.33333;
+
+        &:first-child {
+                margin-top: 0;
+        }
+
+        p {
+                margin-bottom: 0.5em;
+
+                &:last-child {
+                        margin-bottom: 0;
+                }
+        }
+
+        small,
+        cite {
+                display: block;
+                margin-top: 1em;
+                color: _palette(meta);
+                font-size: 0.75em;
+                font-style: normal;
+                font-weight: normal;
+                line-height: 1.5;
+
+                &:last-child {
+                        margin-bottom: 0;
+                }
+        }
+}
+
+@media only screen and (max-width: $md) {
+        blockquote {
+                font-size: 1.25em;
+                line-height: 1.5;
+        }
+}
+
+.list {
+        &-unstyled {
+                list-style-type: none;
+                padding: 0;
+        }
+}
+
+.text {
+        &-lg {
+                font-weight: 600;
+                font-size: 3.5em;
+                line-height: 1;
+        }
+        &-sm {
+                text-transform: capitalize;
+                color: lighten($black, 60%);
+        }
+        &-xs {
+                font-size: 14px;
+                line-height: 1.4;
+                color: lighten($black, 55%);
+        }
+        &-color {
+                color: $main;
+        }
+        &-center {
+                text-align: center;
+        }
+        &-right {
+                text-align: right;
+        }
+        &-left {
+                text-align: left;
+        }
+        &-link {
+                text-decoration: underline;
+        }
+}
+
+.heading {
+        &-sub {
+                font-size: 16px;
+        }
+
+        &-group {
+                @include flex(nowrap, center, space-between, flex);
+                border-bottom: 3px solid $main;
+                margin-bottom: 30px;
+                padding-bottom: 5px;
+        }
+        &-main {
+                @include flex(nowrap, center, space-between, flex);
+                width: 100%;
+                padding: 0 1px;
+
+                user-select: none;
+                
+                & > * {
+                        display: inline-block;
+                        vertical-align: middle;
+                }
+                i {
+                        min-width: 25px;
+                        color: $main;
+                        font-weight: bold;
+                        text-align: left;
+                }
+        }
+
+        &-3 {
+                line-height: 1.2;
+                font-size: 1.4em;
+                font-weight: bold;
+        }
+}
+
+.bennefits {
+        display: block;
+        margin: 20px auto;
+        padding: 5px;
+        &-content {
+                margin-top: 15px;
+                color: lighten($black, 10%);
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 1.4;
+                text-decoration: underline;
+        }
+
+        i {
+                font-size: 60px;
+                color: $main;
+        }
+}
+
+.type-docs {
+        //margin-bottom: 5.625em;
+        max-width: 800px;
+
+        p,
+        li {
+                font-size: 15px;
+                line-height: 1.5;
+                font-weight: 400;
+                color: _palette(secondary);
+                opacity: 0.97;
+        }
+}
+
+.page-title {
+        text-transform: uppercase;
+        font-size: 28px;
+}
+
+
+.page-title {
+        font-size: 1.5em;
+       
+}
+
+@media only screen and (max-width: $md) {
+        .text-lg {
+                font-size: 7vmax;
+        }
+        .page-title {
+                font-size: 17px;
+        }
+}
+@media only screen and (max-width: $xs) {
+        .heading-main i {
+                display: none;
+        }
+}

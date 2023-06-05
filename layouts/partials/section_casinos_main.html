@@ -1,0 +1,33 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}"
+  class="block block-grid outer{{ if or $section.title $section.subtitle }} has-header{{ end }}">
+  <div class="inner">
+
+    {{ if or $section.title $section.subtitle }}
+    <div class="heading-group">
+      <div class="heading-main">
+        <div class="flex ai-c"><i class="ti-star"></i>
+          <h2 class="block-title d-inline-block">{{ $section.title | truncate 80 }}</h2>
+        </div>
+      </div>
+      <a class="read-more-link" href="{{ `/casino` | relURL }}"> All </a>
+
+    </div>
+    {{ end }}
+
+    <div class="block-content">
+      <div class="grid">
+
+        {{ $display_posts := ((.Site.GetPage "section" "/casino").Pages).ByDate.Reverse }}
+        {{ range $index, $post := $display_posts }}
+        {{if le $index 11 }}
+        {{ $size := 31 }}
+        {{ $gap_mod := 16 }}
+        {{ partial "_casino-card-main.html"  (dict "context" . "post" $post "size" $size "gap_mod" $gap_mod ) }}
+        {{ end }}
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+</section>

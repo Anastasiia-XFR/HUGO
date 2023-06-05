@@ -1,0 +1,375 @@
+{{ define "content" }}
+
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner my-40" style="max-width: 1300px;">
+  <div class="docs-content">
+    {{ $include_dict := dict "page" . "Site" .Site }}
+    <div class="post type-docs" style="max-width: 1000px;">
+
+      <!-- <h1> {{ .Title  }} </h1> -->
+
+      <!-- BEGIN hero -->
+      {{ $post := . }}
+      {{ $size := 11 }}
+      {{ $size2 := 100 | sub $size }}
+      {{ $ratio := .Params.bg_ratio }}
+      {{ $bg_color := .Params.bg_color }}
+      {{ $text_color := .Params.txt_color | or "#fff" }}
+
+      <div class="post-hero flex-wrap  mb-30" {{ if .Params.bg_color }}
+        style="background: {{ $bg_color }}; color: {{ $text_color }}" {{ end }}>
+
+        {{ partial "_picture.html" (dict "context" . "post" $post "size" $size "ratio" $ratio "bg_color" $bg_color ) }}
+
+        <div class="flex flex-wrap jc-spb ai-c w{{ $size2 }}">
+
+          <div class="px-30">
+
+            <h1>{{ .Title }}</h1>
+            {{ partial "_rating.html" (dict "context" . "stars" 10) }}
+
+          </div>
+
+          <div class="post-hero-footer">
+            {{ if .Params.site }}
+            <a class="btn-bg btn-md" href="{{ .Params.site }}?ref={{ .Site.Params.domain }}">
+              Visit
+              Casino
+            </a>
+            {{ end }}
+          </div>
+
+        </div>
+      </div>
+      <!-- END hero -->
+
+      <div class="flex flex-wrap  jc-spb mx-n-1 my-20">
+
+        <div class="post-cols-two">
+
+          <div class="post-table">
+            <div class="post-table-row">
+              <div class="post-table-col"> Withdrawal speed</div>
+              <div class="post-table-col"> {{ partial "_rating.html" (dict "context" . "stars" 5) }} </div>
+            </div>
+            <div class="post-table-row">
+              <div class="post-table-col"> Bonus & Offers </div>
+              <div class="post-table-col"> {{ partial "_rating.html" (dict "context" . "stars" 5) }} </div>
+            </div>
+            <div class="post-table-row">
+              <div class="post-table-col"> Security </div>
+              <div class="post-table-col"> {{ partial "_rating.html" (dict "context" . "stars" 5) }} </div>
+            </div>
+            <div class="post-table-row">
+              <div class="post-table-col"> Support </div>
+              <div class="post-table-col"> {{ partial "_rating.html" (dict "context" . "stars" 5) }} </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div class="post-cols-two">
+
+          <div>
+            <h3> Payment Methods </h3>
+            <div class="text-xs" data-target="tooltip">
+
+              {{ $pm := slice }}
+
+              {{ if .Params.deposit }}
+              {{ $pm = $pm | append .Params.deposit }}
+              {{ end }}
+
+              {{ if .Params.withdrawals }}
+              {{ $pm = $pm | append .Params.withdrawals }}
+              {{ end }}
+
+              {{ $pm = uniq ($pm | sort) }}
+
+              {{ range first 8 $pm }}
+              {{ . | truncate 40 }},
+              {{ else }}
+              Nothing Found
+              {{ end }}
+
+
+              <!-- <div class="tooltip">
+              {{ range $pm }}
+              {{ . | truncate 40 }},
+              {{ else }}
+              Nothing Found
+              {{ end }}
+            </div> -->
+
+
+            </div>
+            <h3> Casino Restricted Geo </h3>
+
+            <div class="text-xs" data-target="tooltip">
+              {{ if .Params.geo_resrticted }}
+              {{ range first 8 .Params.geo_resrticted }}
+              {{ . | truncate 80 }},
+              {{ end }}
+              {{ else }}
+              Nothing Found
+              {{ end }}
+
+              <!-- <div class="tooltip">
+            {{ if .Params.geo_resrticted }}
+            {{ range .Params.geo_resrticted }}
+            {{ . | truncate 80 }},
+            {{ end }}
+            {{ else }}
+            Nothing Found
+            {{ end }}
+            </div> -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="post-inside my-20">
+        <div class="post-nav">
+          {{ partial "_prev-next.html" . }}
+          <div class="post-soc">
+            {{ .Scratch.Set "mode" "light" }}
+            {{ partial "_soc.html" . }}
+          </div>
+        </div>
+      </div>
+
+
+      <!-- BEGIN bonuses -->
+      <div class="slider-wrap mb-50 mt-40">
+        <div class="heading-group">
+          <div class="heading-main">
+
+            <div class="flex ai-c">
+              <i class="ti-star"></i>
+              <h2 class="block-title block-title-sm d-inline-block"> Casino Bonuses </h2>
+            </div>
+
+            <div class="slider-nav">
+              <button rel="prev" type="button" class="prev"><i class="ti-angle-left"></i></button>
+              <button rel="next" type="button" class="next"><i class="ti-angle-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        {{ $display_posts := ((.Site.GetPage "section" "/bonus").Pages).ByDate.Reverse }}
+        {{ $post := uniq ($display_posts) }}
+        {{ $size := 100 }}
+        {{ $gap := 0 }}
+        {{ $gap_mod := 0 }}
+        {{ $title := .Title }}
+        {{ $pg := slice }}
+
+        {{ range $index, $post := $display_posts }}
+        {{ if (in $post.Params.casinos $title) }}
+        {{ $pg = $pg | append . }}
+        {{ end }}
+        {{ end }}
+
+        {{ if $pg }}
+        <div class="">
+          <div class="slider">
+
+            {{ range $i, $el := $pg }}
+            {{if le $i 7 }}
+            {{ partial "_bonus-card-related.html" (dict "context" . "post" .  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+            {{ end }}
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+        <!-- {{ range $index, $post := $display_posts }}
+          {{if le $index 3 }}
+          {{ partial "_casino-card-related.html" (dict "context" . "post" $post  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+          {{ end }}
+          {{ end }} -->
+      </div>
+      <!-- END bonuses -->
+
+
+
+      <!-- BEGIN content -->
+      <div class="box mb-30">
+        {{ partial "_casino-tabs.html" . }}
+      </div>
+      <!-- END content -->
+
+
+      <div class="post-inside mb-40">
+        <div class="post-nav">
+          {{ partial "_prev-next.html" . }}
+          <div class="post-soc">
+            {{ .Scratch.Set "mode" "light" }}
+            {{ partial "_soc.html" . }}
+          </div>
+        </div>
+      </div>
+
+      <!-- BEGIN content -->
+      <!-- {{ if (.Content | or ( .Summary )) }}
+      <div class="box">
+        <header class="mb-18">
+          <h2 class="">{{ .Params.title }}</h2>
+        </header>
+        <div class="">
+          {{ partial "_show-more.html" . }}
+
+
+          {{ $root_docs_path := trim .Site.Data.doc_sections.root_docs_path "/" }}
+          {{ $current_page_url := trim .URL "/" }}
+          {{ if ne $root_docs_path $current_page_url }}
+          {{ $child_pages := (($.Site.GetPage "section" $current_page_url).Pages).ByWeight }}
+          {{ $child_count := $child_pages | len }}
+          {{ $has_children := cond (gt $child_count 0) true false }}
+          {{ if $has_children }}
+          <ul class="docs-section-items">
+            {{ range $child_page := $child_pages }}
+            <li class="docs-section-item"><a href="{{ $child_page.RelPermalink }}"
+                class="docs-item-link">{{ $child_page.Title }}<span class="icon-angle-right"
+                  aria-hidden="true"></span></a></li>
+            {{ end }}
+          </ul>
+          {{ end }}
+          {{ end }}
+        </div>
+
+        <footer class="post-footer pb-0">
+          <hr>
+          {{ partial "_prev-next.html" . }}
+            {{ .Scratch.Set "mode" "gradient" }}
+            {{ partial "_soc.html" . }}
+        </footer>
+
+      </div>
+      {{ end }} -->
+      <!-- END content -->
+
+
+      {{ partial "_tags.html" . }}
+
+
+      {{ $display_posts := ((.Site.GetPage "section" "/casino").Pages).ByDate.Reverse }}
+      {{ if gt (len ($display_posts)) 3 }}
+      <!-- BEGIN related -->
+      <div class="my-30 text-center slider-wrap">
+        <div class="block-header">
+
+          <div class="heading-group">
+            <div class="heading-main">
+
+              <div class="flex ai-c"><i class="ti-crown"></i>
+                <h2 class="block-title block-title-sm d-inline-block"> Related Casinos </h2>
+              </div>
+
+              <div class="slider-nav">
+                <button rel="prev" type="button" class="prev"><i class="ti-angle-left"></i></button>
+                <button rel="next" type="button" class="next"><i class="ti-angle-right"></i></button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="slider">
+          {{ $post := uniq ($display_posts) }}
+          {{ $size := 100 }}
+          {{ $gap := 0 }}
+          {{ $gap_mod := 0 }}
+          {{ range $index, $post := $display_posts }}
+          {{if le $index 7 }}
+          {{ partial "_casino-card-related.html" (dict "context" . "post" $post  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+      <!-- END related -->
+      {{ end }}
+
+      {{ partial "_subscribe-form.html" . }}
+
+      <!-- {{ if gt (len ($display_posts)) 3 }} -->
+      <!-- BEGIN related News -->
+      {{ $display_posts := ((.Site.GetPage "section" "/info/news").Pages).ByDate.Reverse }}
+
+      {{ $post := $display_posts }}
+      {{ $size := 100 }}
+      {{ $gap := 0 }}
+      {{ $gap_mod := 0 }}
+      {{ $title := .Title }}
+
+      {{ $pg := slice }}
+
+      {{ range $index, $post := $display_posts }}
+      {{if in $post.Params.tags $title }}
+
+      {{ $pg = $pg | append . }}
+
+      {{ end }}
+      {{ end }}
+
+
+      {{if $pg }}
+      <div class="my-30 text-center slider-wrap">
+
+        <div class="heading-group">
+          <div class="heading-main">
+
+            <div class="flex ai-c">
+              <i class="ti-receipt"></i>
+              <h2 class="block-title block-title-sm d-inline-block"> Casino News </h2>
+            </div>
+
+            <div class="slider-nav">
+              <button rel="prev" type="button" class="prev"><i class="ti-angle-left"></i></button>
+              <button rel="next" type="button" class="next"><i class="ti-angle-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider">
+          {{ range $i, $el := $pg }}
+          {{ if le $i 7  }}
+          {{ partial "_news-card-related.html" (dict "context" . "post" .  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+          {{ end }}
+          {{ end }}
+        </div>
+
+      </div>
+      {{ end }}
+      <!-- END related News -->
+      <!-- {{ end }} -->
+
+      <!-- BEGIN comments -->
+      <div class="my-50">
+        <div class="heading-group">
+          <div class="heading-main">
+            <div class="flex ai-c"><i class="ti-comment-alt"></i>
+              <h2 class="block-title block-title-sm d-inline-block"> Comments </h2>
+            </div>
+          </div>
+        </div>
+        {{ partial "_comments.html" . }}
+      </div>
+      <!-- END comments -->
+
+    </div>
+
+    {{ partial "_casino-sidebar.html" . }}
+
+  </div>
+
+</div>
+</div>
+
+{{ end }}

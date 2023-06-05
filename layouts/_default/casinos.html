@@ -1,0 +1,29 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner">
+  <section class="pt-50 mxp-1">
+    {{ partial "_search.html" . }}
+  </section>
+
+  <section class="post-feed my-30">
+    {{ $display_posts := ((.Site.GetPage "section" "/casino").Pages).ByDate.Reverse }}
+    {{ $paginator := .Paginate $display_posts 24 }}
+    {{ $size := "31" }}
+    {{ $gap := "0" }}
+    {{ $gap_mod := "16" }}
+    {{ range $post := $paginator.Pages }}
+    {{ partial "_casino-card-main.html"  (dict "context" . "post" $post "size" $size "gap" $gap "gap_mod" $gap_mod ) }}
+    {{ end }}
+  </section>
+
+  <!-- Pagination TBD -->
+  <section class="mb-50 mt-30">
+    {{ partial "pagination.html" . }}
+  </section>
+
+</div>
+{{ end }}

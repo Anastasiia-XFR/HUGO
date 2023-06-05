@@ -1,0 +1,237 @@
+<!-- BEGIN casino card -->
+<div class="tabs">
+  <header class="tabs-nav">
+    <button class="tabs-toggle active">
+      Main Info
+    </button>
+    <button class="tabs-toggle">
+      Details
+    </button>
+
+    {{ if (.Params.good | or (.Params.bad)) }}
+    <button class="tabs-toggle">
+      Benefits & Negatives
+    </button>
+    {{ end }}
+
+  </header>
+  <div class="tabs-content">
+    <section class="tabs-block">
+
+      <!-- BEGIN table -->
+      <div class="table">
+
+        {{ if .Params.bonus }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">
+            <small class="icon ti-angle-right"></small>
+            Type: </div>
+          <div class="table-col">
+            {{ .Params.bonus | truncate 100 }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.bonus_val }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> 
+            <small class="icon ti-angle-right"></small>
+             Value: </div>
+          <div class="table-col">
+            {{ if .Params.percent }} {{ .Params.percent | truncate 50 }} {{ end }}
+            &nbsp; Up to: &nbsp;
+            {{ range first 100 .Params.bonus_val }}
+            <span>{{ .val | truncate 100 }} {{ .currency | truncate 100 }}</span>;
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.fs }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">
+            <small class="icon ti-angle-right"></small>
+
+            Free Spins: </div>
+          <div class="table-col"> {{ .Params.fs | truncate 100 }} </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.promocode }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> 
+            <small class="icon ti-angle-right"></small>
+
+            Promo Code: </div>
+          <div class="table-col">
+            {{ .Params.promocode | truncate 100 }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.site }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">
+            <small class="icon ti-angle-right"></small>
+            Site: </div>
+          <div class="table-col">
+            <a href="{{ .Params.site }}?ref={{ .Site.BaseURL }}"> {{ .Params.site }} </a>
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.terms }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> 
+            <small class="icon ti-angle-right"></small>
+            Terms: </div>
+          <div class="table-col">
+            <a href="{{ .Params.terms }}?ref={{ .Site.BaseURL }}"> {{ .Params.terms }} </a>
+          </div>
+        </div>
+        {{ end }}
+
+
+      </div>
+      <!-- END table -->
+
+    </section>
+    <section class="tabs-block">
+
+      <!-- BEGIN table -->
+      <div class="table">
+
+        {{ if .Params.casinos }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Casino: </div>
+          <div class="table-col"> {{ .Params.casinos | truncate 50 }} </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.geo_resrticted }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Restricted Geo: </div>
+          <div class="table-col">
+
+            {{ range first 100 .Params.geo_resrticted  }}
+            {{ . | title }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.bonus_WR }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Wagering requirements: </div>
+          <div class="table-col">
+            {{ .Params.bonus_WR | truncate 50 }}
+
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.payments }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Payment Methods: </div>
+          <div class="table-col">
+
+            {{ range first 100 .Params.payments }}
+            {{ . | title }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.bonus_min_dep }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Minimum Deposit: </div>
+          <div class="table-col">
+
+            {{ range first 100 .Params.bonus_min_dep }}
+            {{ .val | truncate 50 }} {{ .currency | truncate 50 }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.bonus_max_cashout }}
+        <div class="table-row">
+          <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Maximum Withdrawal: </div>
+          <div class="table-col">
+
+            {{ range first 100 .Params.bonus_max_cashout }}
+            {{ .val | truncate 50 }} {{ .currency | truncate 50 }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+      </div>
+      <!-- END table -->
+    </section>
+
+    {{ if (.Params.good | or (.Params.bad)) }}
+
+    <section class="tabs-block">
+
+      <!-- {{ if .Params.logo }}
+      <div class="table-row">
+        <div class="table-col">
+
+          <picture class="post-logo">
+            {{ range $index, $el := .Params.logo }}
+            {{ if eq $index 1 }}
+            <source srcset="{{ . | relURL }}" type="image/webp">
+            {{ end }}
+            {{ if eq $index 0 }}
+            <img src="{{ . | relURL }}" alt="{{ $.Params.title }}">
+            {{ end }}
+            {{ end }}
+          </picture>
+        </div>
+      </div>
+      {{ end }} -->
+
+
+      <div class="table-row">
+        {{ if .Params.good }}
+        <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Good: </div>
+        {{ end }}
+        {{ if .Params.bad }}
+        <div class="table-col table-col-heading">   <small class="icon ti-angle-right"></small> Bad: </div>
+        {{ end }}
+      </div>
+      <div class="table-row ai-fs">
+        {{ if .Params.good }}
+        <div class="table-col">
+          <ul>
+            {{ range .Params.good }}
+            <li> {{ . | truncate 200 }} </li>
+            {{ end }}
+          </ul>
+
+        </div>
+        {{ end }}
+        {{ if .Params.bad }}
+        <div class="table-col">
+          <ul>
+            {{ range .Params.bad }}
+            <li> {{ . | truncate 200 }} </li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+      </div>
+
+    </section>
+    {{ end }}
+
+  </div>
+</div>
+<!-- END casino card -->

@@ -1,0 +1,245 @@
+title: Slot Brain
+baseURL: https://wonderful-bhabha-3f583e.netlify.app/
+relativeURLs: false
+paginate: 24
+
+sitemap:
+  ChangeFreq: daily
+  Priority: 0.6
+  Weight: 
+    - type: main
+      priority: 1
+    - type: sub2
+      priority: 0.8
+    - type: sub3
+      priority: 0.6
+
+outputs:
+  home: 
+    - HTML
+    - JSON
+    - RSS
+
+params:
+  domain: slotsbrain.com
+  og_image: images/logo_w.png
+  preloader: 
+    enable: true
+    preloader: images/logo_w.png
+
+  description: A documentation theme
+  palette: blue
+  
+  rating:
+    enable: true
+    websiteID: "444334"
+    publicKey: "811cf0927332bf51f2e12f84608594ac"
+
+  disqus:
+    enable: true
+    url: https-slotbrain-com
+
+  palettes:
+    blue:
+      type: palette
+      template: palette
+      sass:
+        accent1: '#63ba2a'
+        accent2: '#0072ff'
+    green:
+      type: palette
+      template: palette
+      sass:
+        accent1: '#12db5d'
+        accent2: '#11998e'
+    navy:
+      type: palette
+      template: palette
+      sass:
+        accent1: '#004e92'
+        accent2: '#000428'
+    violet:
+      type: palette
+      template: palette
+      sass:
+        accent1: '#8e2de2'
+        accent2: '#4a00e0'
+
+
+  header:
+    type: header
+    template: header
+    title: SlotBrain
+    logo_img: images/logo_w.png
+    has_nav: true
+    nav_links:
+      - type: action_menu
+        template: action_menu
+        label: Casinos
+        url: /casino
+        style: link
+        has_subnav: false
+      - type: action_menu
+        template: action_menu
+        label: Games
+        url: /game
+        style: link
+        has_subnav: false
+      - type: action_menu
+        template: action_menu
+        label: Bonuses
+        url: /bonus
+        style: link
+        has_subnav: false
+      - type: action_menu
+        template: action_menu
+        label: Other
+        url: /other
+        style: link
+        has_subnav: true
+        subnav_links:
+          - type: action
+            template: action
+            label: Affiliate
+            url: /other/affiliate
+            style: link
+          - type: action
+            template: action
+            label: Affiliates
+            url: /other/affiliates
+            style: link
+          - type: action
+            template: action
+            label: Providers
+            url: /other/providers
+            style: link
+      - type: action_menu
+        template: action_menu
+        label: Info
+        url: /info
+        style: link
+        has_subnav: true
+        subnav_links:
+          - type: action
+            template: action
+            label: About
+            url: /info/about
+            style: link
+          - type: action
+            template: action
+            label: T & C
+            url: /info/terms
+            style: link
+          - type: action
+            template: action
+            label: Sitemap
+            url: /info/sitemap
+            style: link
+          - type: action
+            template: action
+            label: FAQ
+            url: /info/faq
+            style: link
+          - type: action
+            template: action
+            label: Knowledge Base
+            url: /info/knowledge
+            style: link
+          - type: action
+            template: action
+            label: News & Blog
+            url: /info/news
+            style: link
+  
+    
+  footer:
+    type: footer
+    template: footer
+    copyright: 'Copyright © 2020 slotsbrain.com. All rights reserved. '
+    has_nav: true
+    footer_nav:
+        - type: action
+          template: action
+          label: Casinos
+          url: '/casino'
+          style: link
+        - type: action
+          template: action
+          label: Games
+          url: '/game'
+          style: link
+        - type: action
+          template: action
+          label: Bonuses
+          url: '/bonus'
+          style: link
+        - type: action
+          template: action
+          label: Info
+          url: '/info'
+          style: link
+        - type: action
+          template: action
+          label: News
+          url: '/info/news'
+          style: link
+        - type: action
+          template: action
+          label: T & C
+          url: '/info/terms'
+          style: link
+    has_social: true
+    social_links:
+      - type: action
+        template: action
+        label: facebook
+        url: '#'
+        style: icon
+        icon_class: fab fa-facebook-f
+        new_window: true
+      - type: action
+        template: action
+        label: twitter
+        url: '#'
+        style: icon
+        icon_class: fab fa-twitter
+        new_window: true
+      - type: action
+        template: action
+        label: skype
+        url: '#'
+        style: icon
+        icon_class: fab fa-skype
+        new_window: true
+      - type: action
+        template: action
+        label: email
+        url: '#'
+        style: icon
+        icon_class: ti-email
+        new_window: true
+      - type: action
+        template: action
+        label: telegram
+        url: '#'
+        style: icon
+        icon_class: fab fa-telegram-plane
+        new_window: true
+      - type: action
+        template: action
+        label: viber
+        url: '#'
+        style: icon
+        icon_class: fab fa-viber
+        new_window: true
+
+taxonomies:
+  stub: stub
+  category: categories
+  tag: tags
+
+
+disableKinds:
+  - RSS
+  - taxonomy
+  - taxonomyTerm

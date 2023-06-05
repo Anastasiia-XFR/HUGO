@@ -1,0 +1,5 @@
+root_other_path: /info/news
+sections:
+  - news
+  - blog
+

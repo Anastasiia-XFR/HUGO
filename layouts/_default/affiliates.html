@@ -1,0 +1,68 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+
+<div class="inner outer">
+
+  <section class="pt-50 mxp-1">
+    {{ partial "_search.html" . }}
+  </section>
+
+  <div class="post-feed my-30">
+    {{ $display_posts := ((.Site.GetPage "section" "/other/affiliates").Pages).ByDate.Reverse }}
+
+    {{ $paginator := .Paginate $display_posts }}
+
+    {{ range $post := $paginator.Pages }}
+    <div class="post w-23 text-center mp-1">
+
+    {{ $ratio := $post.Params.bg_ratio }}
+    {{ $bg_color := $post.Params.bg_color }}
+    {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+
+      <a href="{{ $post.RelPermalink }}" class="post-inner mih-70 pt-10">
+        <header class="post-header py-0">
+          <!-- <div class="post-meta mb-0">
+         <b>
+            {{ if $post.Params.casinos }}
+            <small>
+              {{ $post.Params.casinos }}
+            </small>
+            {{ end }}
+            <small>/</small>
+            {{ if $post.Params.soft }}
+            <small>
+              {{ $post.Params.soft }}
+            </small>
+            {{ end }}
+         </b>
+        </div> -->
+
+          <p class="post-title"> {{ $post.Params.title | truncate 35 }} </p>
+
+        </header>
+      </a>
+      <footer class="post-footer">
+        <p class="mt-0 mb-15">
+          {{ if $post.Params.site }}
+          <a href="{{ $post.Params.site }}?ref=.Site.BaseURL" class="button-link"> {{ $post.Params.site | truncate 45 }}
+          </a>
+          {{ end }}
+        </p>
+        <a href="{{ $post.RelPermalink }}" class="button-bd-sm button-block py-8"> Read Review </a>
+      </footer>
+
+    </div>
+    {{ end }}
+  </div>
+  <!-- Pagination TBD -->
+  <div class="mb-50 mt-30">
+    {{ partial "pagination.html" . }}
+  </div>
+
+</div>
+
+{{ end }}

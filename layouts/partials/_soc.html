@@ -1,5 +1,9 @@
-<ul class="list-inline text-center mb-0">
-    {{ range .Site.Params.social }}
-    <li class="list-inline-item list-inline-item"><a href="{{ .link | safeURL }}"><img src="{{ .icon | relURL }}"></img></a></li>
-    {{ end }}
-</ul>
+{{ if .Site.Params.footer.has_social }}
+<div class="social-links {{ .Scratch.Get "mode" }}">
+  {{ range $action := .Site.Params.footer.social_links }}
+  <button class="social_share" data-type="{{ .label }}" title="{{ .label }}"> 
+    <i class="{{ .icon_class }}"></i>  
+  </button>
+  {{ end }}
+</div>
+{{ end }}

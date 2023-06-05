@@ -1,0 +1,528 @@
+/**
+ * Posts and Pages
+ */
+.post {
+  position: relative;
+  margin-bottom: 2.5em;
+  border-bottom: 1px solid _palette(border);
+
+  & > a {
+    width: 100%;
+    border: none;
+  }
+
+  &-full {
+    &:last-child {
+      margin-bottom: 5em;
+    }
+  }
+
+  &-header {
+    //padding-bottom: 9.5em;
+    padding-bottom: 7em;
+    padding-top: 3.75em;
+    position: relative;
+    border: none;
+
+    .inner-sm {
+      position: relative;
+    }
+  }
+
+  &-title {
+    margin: 0;
+    position: relative;
+    color: inherit;
+    font-size: 3em;
+  }
+
+  &-subtitle {
+    margin: 0.5em 0 0;
+    position: relative;
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+
+  &-hero {
+    @include flex(wrap, center, center, flex);
+    padding: 15px;
+    border-radius: $brs;
+    box-shadow: $bxsd;
+
+    h1, p {
+      color: inherit;
+      margin: 0;
+    }
+
+   &-footer {
+     padding-right: 30px;
+     padding-left: 30px;
+   }
+    &-subtitle {
+      @include flex(wrap, center, center, flex);
+      text-transform: uppercase;  
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    @media only screen and (max-width: $md){
+      [class*=w]{
+        max-width: 100%;
+        justify-content: center;  
+        text-align: center;
+      }
+      .pic {
+        max-width: 150px;
+        margin: 0 auto;
+      }
+
+      &-footer {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+        padding-right: 0;
+        padding-left: 0;
+        padding-top: 15px;
+      }
+      
+    }
+
+  }
+
+  time {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  &-thumbnail {
+    position: relative;
+    margin: 0;
+    width: 100%;
+
+    img,
+    iframe {
+      @include abs(absolute, 0, 0);
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-logo {
+    display: block;
+    position: relative;
+    height: 50px;
+    width: 200px;
+    img {
+      @include abs(absolute, 0, 0);
+      display: block;
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  & > a {
+    color: inherit;
+  }
+  &-wrap {
+    display: block;
+    border: none;
+  }
+  &-footer {
+    display: block;
+    padding: 0 $spcer $spcer;
+    margin: 0;
+    border: none;
+
+    .box & {
+      padding: 0;
+    }
+  }
+
+  &-columns {
+    column-count: 2;
+    column-gap: 45px;
+    @media only screen and (max-width: $lg){
+      column-count: 1;
+      column-gap: 0;
+
+    }
+  }
+
+
+  &-header {
+    display: block;
+    width: 100%;
+    padding: $spcer;
+    border: none;
+    color: lighten($black, 40%);
+
+    .post-title {
+      color: lighten($black, 20%);
+    }
+  }
+
+  &-title {
+    line-height: 1.3;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    a {
+      border: 0;
+      color: inherit;
+
+      &:hover {
+        color: _palette(meta);
+      }
+    }
+  }
+
+  &-tag {
+    @extend .button-bg-sm;
+    @include abs(absolute, 0, auto);
+    right: 0;
+  }
+
+  &-meta {
+    margin: 0 0 0.5em;
+    font-size: 0.875em;
+    line-height: 1;
+  }
+
+  &-content {
+    width: 100%;
+    padding-left: $spcer;
+    padding-right: $spcer;
+
+    // font-size: 17px;
+    // line-height: 1.5;
+    // font-weight: bolder;
+
+    color: _palette(secondary);
+
+    &:after {
+      clear: both;
+    }
+  
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+
+    @media only screen and (max-width: $xlg) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    @media only screen and (max-width: $sm) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &-cover {
+    position: relative;
+    min-height: 20px;
+
+    @include flex(nowrap, center, center, flex);
+
+  
+  }
+
+  &-info {
+    @include abs(absolute, 10px, 10px, 0, auto);
+    @include flex(wrap, flex-start, space-between, flex);
+    width: 90%;
+    width: calc(100% - 20px);
+    //right: 0;
+    //bottom: 0;
+  }
+
+  &-inner {
+    @include flex(wrap, center, center, flex);
+    min-height: 200px;
+    border-bottom: 0;
+  }
+
+  &-related {
+    @include flex(wrap, stretch, center, flex);
+  }
+
+  &-nav {
+    @include flex(nowrap, center, space-between, flex);
+
+    @media only screen and (max-width: 1070px) {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .post-soc {
+        width: 100%;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+    }
+    @media only screen and (max-width: $sm) {
+      justify-content: space-between;
+    }
+  }
+
+  .box {
+    h1,
+    h2 {
+      &:first-of-type {
+        margin-top: 0 !important;
+      }
+    }
+  }
+  
+  &-table {
+    width: 100%;
+    &-row {
+      @include flex(wrap, center, space-between, flex);
+      font-weight: bold;
+      font-size: 14px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    &-col {
+      padding: 5px 0;
+
+      &:first-child {
+        text-align: left;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+   
+    @media only screen and (max-width: $xs){ 
+      &-col {
+        width: 100%;
+        &:first-child, &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+  &-card {
+    display: inline-flex;
+    flex-wrap: wrap;
+    border-radius: $brs;
+    overflow: hidden;
+    .post-inner {
+      border-top: 4px solid $main;
+    }
+    .post-excerpt {
+      line-height: 1;
+    }
+    .post-cover {
+      background-color: lighten($black, 95%);
+      max-height: 200px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .post-meta {
+      max-height: 35px;
+      overflow: hidden;
+    }
+  }
+  &-aff {
+    .post-inner {
+      border: none;
+      padding: 0;
+      min-height: 130px;
+    }
+  }
+
+  &.post-card {
+    background-color: $white;
+    border: $bd2;
+    box-shadow: $bxsd;
+    margin-bottom: 0;
+    p {
+      font-size: 14px;
+    }
+    .post-title {
+      margin-bottom: 0;
+      font-size: 15px;
+    }
+    // .post-header {
+    //   padding-bottom: 10px;
+    // }
+    .post-footer {
+      @include flex(nowrap, center, center, flex);
+    }
+
+    a[class*="button"] {
+      padding: 0.75em 1.25em;
+    }
+  }
+
+  &-news {
+    @include flex(wrap, stretch, center, flex);
+    margin: 0;
+    border: none;
+    .post-header,
+    .post-footer {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .post-footer {
+      padding-bottom: 0;
+    }
+    .post-header {
+      padding-top: 15px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1.5px solid lighten($black, 90%);
+    }
+
+    .post-content {
+      padding: 1em 2em 1.5em;
+      background-color: $white;
+    }
+  }
+  &-bonuses {
+    .post {
+      align-self: stretch;
+      &-content {
+        font-weight: bold;
+        font-size: 17px;
+        line-height: 1.5;
+        padding: 0;
+      }
+
+      &-header {
+        margin-bottom: 0 !important;
+      }
+
+      &-info {
+        justify-content: flex-start;
+      }
+
+      &-title {
+        margin-top: 0px;
+        margin-bottom: 3.5%;
+        font-size: 12px;
+      }
+    }
+  }
+
+  &-games {
+    margin: 1em auto;
+    text-align: center;
+    background-color: $white;
+    border-bottom: $bd2;
+    box-shadow: $bxsd;
+    .post {
+      // &-cover {
+      //   min-height: 120px;
+      // }
+
+      &-inner {
+        min-height: 60px;
+      }
+
+      &-header {
+        padding: 0 $spcer;
+      }
+
+      &-title {
+        color: _palette(secondary);
+        font-size: 12px;
+        line-height: 1.3;
+        text-transform: uppercase;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.post-feed {
+  @include flex(wrap, flex-start, flex-start, flex);
+
+  margin-top: -5em;
+  position: relative;
+
+  &-card {
+    @include flex(wrap, center, flex-start, flex);
+
+    .post {
+      width: 30%;
+      margin: 1.5%;
+      align-self: stretch;
+      //min-width: 250px;
+    }
+
+    &-four {
+      @extend .post-feed-card;
+      .post {
+        width: 22%;
+        margin: 1.5%;
+        align-self: stretch;
+        //min-width: 250px;
+      }
+    }
+  }
+  .line-left {
+    padding: 0 $spcer;
+  }
+}
+
+.post-full .post-content,
+.post-feed .post {
+  background: $white;
+  //border: 1px solid _palette(border);
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.08);
+}
+
+.post-full {
+  .post-content {
+    padding: 2.5em 7%;
+  }
+
+  .post-meta {
+    color: inherit;
+    font-size: 1.125rem;
+    line-height: 1;
+  }
+}
+
+.post-feed {
+  &:last-child {
+    margin-bottom: 5em;
+  }
+  .post {
+    &-title {
+      text-transform: uppercase;
+    }
+    &-excerpt {
+      margin-bottom: 1.125em;
+    }
+  }
+}
+
+
+.post-cols {
+  &-two {
+    padding: 4em;
+    width: 48%;
+    margin: 1%;
+    border-radius: $brs;
+    background-color: $white;
+    box-shadow: $bxsd;
+
+    @media only screen and (max-width: $lg){
+      padding: 4em 2em;
+     }
+    @media only screen and (max-width: $md){
+      width: 98%;
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{{ define "content" }}
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+<div class="pg-affiliate">
+
+    {{ partial "_hero.html" . }}
+    {{ partial "breadcrumbs.html" . }}
+
+    <div class="inner-md text-center py-60 px-10">
+        <h2 class="heading-3">
+            Fruitful Partnership.
+            Outstanding Accomplishments
+        </h2>
+        <p class="heading-sub mt-20">
+            Become an SlotsBrain affiliate and benefit from an award-winning online casino review platform. For years,
+            we've been constantly accomplishing our partner's goals in terms of professional companionship and
+            effectiveness.
+        </p>
+
+        <div class="flex flex-wrap jc-c my-30">
+            <div class="w-25">
+                <figure class="bennefits">
+                    <div class="bennefits-cover">
+                        <i class="ti-crown"></i>
+                    </div>
+                    <figcaption class="bennefits-content">
+
+                        Lorem ipsum dolor sit amet, consectetur adipisicing.
+
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="w-25">
+                <figure class="bennefits">
+                    <div class="bennefits-cover">
+                        <i class="ti-infinite"></i>
+                    </div>
+                    <figcaption class="bennefits-content">
+                        Lorem ipsum dolor, consectetur adipisicing.
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="w-25">
+                <figure class="bennefits">
+                    <div class="bennefits-cover">
+                        <i class="ti-bar-chart"></i>
+                    </div>
+                    <figcaption class="bennefits-content">
+                        Lorem ipsum dolor sit amet, consectetur.
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="w-25">
+                <figure class="bennefits">
+                    <div class="bennefits-cover">
+                        <i class="ti-wallet"></i>
+                    </div>
+                    <figcaption class="bennefits-content">
+                        Lorem dolor sit amet, consectetur adipisicing.
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <a href="#" class="button">
+            JOIN US NOW
+        </a>
+        <p class="mt-10 mb-0">
+            <a class="" href="{{ `/other/affiliates` | relLangURL }}">
+                <small>Other Affiliates Review</small>
+            </a>
+        </p>
+    </div>
+</div>
+
+{{ end }}

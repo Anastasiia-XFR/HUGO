@@ -1,0 +1,42 @@
+{{ define "content" }}
+
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner-md outer">
+  <div class="post-feed my-80">
+    {{ $display_posts := ((.Site.GetPage "section" "/blog").Pages).ByDate.Reverse }}
+    {{ range $post := $display_posts }}
+    <div class="post">
+      {{ if $post.Params.thumb_image }}
+      <a class="post-thumbnail" href="{{ $post.RelPermalink }}">
+        <img src="{{ $post.Params.thumb_image | relURL }}" alt="{{ $post.Params.title }}" />
+      </a>
+      {{ end }}
+
+      <a href="{{ $post.RelPermalink }}">
+        <header class="post-header pb-20">
+          <div class="post-meta">
+            <time class="published"
+              datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">{{ $post.Date | dateFormat "January 02 / 2006 / 15:04" }}</time>
+          </div>
+          <h2 class="post-title">{{ $post.Params.title | truncate 100 }}</h2>
+        </header>
+        {{ if $post.Params.excerpt }}
+        <footer class="post-footer">
+
+          {{ if $post.Params.type }} <span class="post-tag"> {{ $post.Params.type }} </span> {{ end }}
+
+          <p class="post-excerpt">{{ $post.Params.excerpt | truncate 200 }}</p>
+          <p class="read-more"> <span class="read-more-link"> Read More </span></p>
+        </footer>
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+{{ end }}

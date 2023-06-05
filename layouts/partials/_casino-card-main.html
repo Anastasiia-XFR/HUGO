@@ -1,0 +1,22 @@
+<!-- BEGIN casino card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+{{ $gap_mod := .gap_mod }}
+<figure class="card-row mih-90 as-str {{ if $size }} w-{{  $size  }} {{  else }} w-32 {{ end }}  {{ if $gap_mod }} mp-1-{{ $gap_mod }} {{ end }}">
+  <div class="flex flex-wrap w-50 px-10">
+    
+    <a class="card-row-header" href="{{ $post.RelPermalink }}">
+      <h3 class="card-row-title"> {{ $post.Title | truncate 40 }} </h3>
+    </a>
+
+  </div>
+  <footer class="card-row-footer flex ai-c w-50">
+    {{ if $post.Params.site }}
+    <a class="btn-bg btn-sm" href="{{ $post.Params.site }}"> Visit </a>
+    {{ end }}
+    <a class="btn-bd btn-sm" href="{{ $post.RelPermalink }}"> Review </a>
+
+  </footer>
+</figure>
+<!-- END casino card -->

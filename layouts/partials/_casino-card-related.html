@@ -1,0 +1,52 @@
+<!-- BEGIN casino card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+{{ $gap_mod := .gap_mod }}
+
+<div  class="post post-card {{ if $size }} w-{{ $size }} {{ end }} {{ if $gap }} mp-{{ $gap }} {{ else }} {{ if $gap_mod }} mp-1-{{ $gap_mod }}  {{ end }} {{ end }}">
+ 
+ 
+    <figure class="post-cover py-15 px-15" {{ if $post.Params.bg_color }} style="background: {{ $post.Params.bg_color }};" {{ end }}>
+      {{ $size := 45 }}
+      {{ $ratio := $post.Params.bg_ratio }}
+      {{ $bg_color := $post.Params.bg_color }}
+      {{ partial "_picture.html" (dict "context" . "post" $post "size" $size "ratio" $ratio "bg_color" $bg_color ) }}
+
+    </figure>
+
+    <a href="{{ $post.RelPermalink }}">
+
+    <header class="post-header mih-120 pt-20 pb-0">
+     
+      <h4 class="post-title flex ai-c jc-c mih-30">
+        {{ $post.Params.title | truncate 35 }}
+      </h4>
+      {{ partial "_rating.html" (dict "context" . "stars" 10) }}
+
+      {{ if ($post.Params.providers | or ($post.Params.games)) }}
+      <div class="post-meta text-center mih-40 mt-5">
+        <small>
+          {{ if $post.Params.providers }}
+          {{ range first 4 $post.Params.providers }}
+          {{ . | truncate 40 }},
+          {{ end }},
+          {{ end }}
+        
+          {{ if $post.Params.games }}
+          {{ range first 4 $post.Params.games }}
+            {{ .| truncate 40 }},
+          {{ end }}
+          {{ end }}
+        </small>
+      </div>
+      {{ end }}
+
+    </header>
+
+  <footer class="post-footer mt-15 pt-0 pb-30">
+    <span class="btn-bg btn-md"> Casino Review </span>
+  </footer>
+</a>
+</div>
+<!-- END casino card -->

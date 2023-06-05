@@ -1,0 +1,19 @@
+
+<section class="show-more-block"> 
+	<div class="show-more-less">
+		{{ $body := replace .Content .Summary "" }}
+		{{ $body | safeHTML | truncate 200 }}
+	</div>
+	<div class="show-more-all d-none">
+		{{ $body := replace .Content .Summary "" }}
+		{{ $body | safeHTML }} 
+		<hr>
+	</div>
+	
+	<button class="btn-bd show-more-toggle"> 
+		<span class=""> Show more </span> <span class="d-none"> Show less </span>
+	</button>
+	
+</section>
+
+

@@ -1,0 +1,74 @@
+<!-- BEGIN casino card -->
+{{ $post := .post }}
+{{ $size := .size }}
+{{ $gap := .gap }}
+{{ $gap_mod := .gap_mod }}
+<div
+  class="post post-card as-str text-center {{ if $size }} w-{{ $size }} {{ end }} {{ if $gap }} mp-{{ $gap }} {{ else }} {{ if $gap_mod }} mp-1-{{ $gap_mod }}  {{ end }} {{ end }}">
+
+  {{ if $post.Params.bg_color }}
+  <figure class="post-cover py-15 px-15" {{ if $post.Params.bg_color }} style="background: {{ $post.Params.bg_color }};"
+    {{ end }}>
+    {{ $size := 45 }}
+    {{ $ratio := $post.Params.bg_ratio }}
+    {{ $bg_color := $post.Params.bg_color }}
+    {{ partial "_picture.html" (dict "context" . "post" $post "size" $size "ratio" $ratio "bg_color" $bg_color ) }}
+    <div class="post-info">
+      <small class="btn-bg btn-sm">
+        {{ if $post.Params.bonus }}
+        {{ $post.Params.bonus }}
+        {{ end }}
+      </small>
+    </div>
+  </figure>
+  {{ end }}
+
+  <a href="{{ $post.RelPermalink }}">
+    <header class="post-header px-20 py-20">
+     
+      <h4 class="post-title">
+        {{ $post.Params.title | truncate 45 }}
+      </h4>
+      {{ partial "_rating.html" (dict "context" . "stars" 10) }}
+
+      <div class="mt-8">
+        <p class="my-0">
+          <b>
+            {{ if $post.Params.percent }}
+            <b>{{ $post.Params.percent }}</b> Bonus
+            {{ end }}
+  
+            {{ if $post.Params.bonus_val }}
+            {{ range $index, $el := $post.Params.bonus_val }}
+            {{ if eq $index 0 }}
+            up to <b>{{ .val }} {{ .currency }}</b>
+            {{ end }}
+            {{ end }}
+            {{ end }}
+  
+            {{ if $post.Params.fs }}
+            + <b>{{ $post.Params.fs }} FS </b>
+            {{ end }}
+
+            {{ if $post.Params.promocode }}
+           / <b>PC:</b> <b class="text-color">{{ $post.Params.promocode | truncate 60 }}</b>
+           {{ end }}
+          </b>
+        </p>
+
+     
+
+      </div>
+    </header>
+
+    {{ if $post.Params.excerpt }}
+    <p class="post-excerpt">{{ $post.Params.excerpt }}</p>
+    {{ end }}
+
+    <footer class="post-footer bg-gray py-15">
+      <span class="btn-gray"> Review Bonus </span>
+    </footer>
+  </a>
+
+</div>
+<!-- END casino card -->

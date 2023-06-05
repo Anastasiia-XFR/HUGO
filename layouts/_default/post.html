@@ -1,35 +1,151 @@
-<div class="card rounded-0">
+{{ define "content" }}
 
-  {{ if .Params.Img }}
-  <a class="card-img-wrap" href="{{ .Permalink }}">
-  <img class="card-img-top rounded-0" src="{{ .Params.Img | relURL }}">
-  {{ else }}
-  <img class="card-img-top rounded-0" src="{{ `/images/news.jpg` | relURL }}">
-  </a>
-  {{ end }}
+<div class="post post-full">
+  <header class="post-header has-gradient outer text-center">
+    {{ if .Params.image }}
+    <div class="bg-img"></div>
+    {{ end }}
+    <div class="inner-sm">
+      <div class="post-meta">
+        <small><time class="published"
+            datetime="{{ .Date | dateFormat "2006-01-02 15:04" }}">{{ .Date | dateFormat "January 02 / 2006 / 15:04" }}</time></small>
+      </div>
+      <h1 class="post-heading my-0">{{ .Params.title }}</h1>
+      <!-- {{ if .Params.subtitle }}
+        <div class="post-subtitle">
+          {{ $.Params.subtitle | safeHTML }}
+        </div>
+        {{ end }} -->
+    </div>
+  </header>
+  {{ partial "breadcrumbs.html" . }}
 
-  <div class="card-body">
-    <div class="mb-2"> 
-      {{ if .Params.author }}
-      <span class="text-dark font-weight-bold" >{{ .Params.author | title }}</span> |
-      {{ end }}
-      <strong class="text-dark">
-        {{  dateFormat "02/01/2006 | 15:04" .Date.Local }}
-      </strong></div>
-    <h4 class="card-head">
-      {{ if .Params.url }}
-      <a href="{{ .Params.url }}">{{ .Title | truncate 50 }}</a>
-      {{ else }}
-      <a href="{{ .Permalink }}">{{ .Title | truncate 50 }}</a>
-      {{ end }}
-    </h4>
-    {{ if .Summary }}
-    <p>{{ .Summary }}...</p>
-    {{ end }}
-    {{ if .Params.url }}
-    <a href="{{ .Params.url }}" class="btn btn-primary btn-sm">{{ i18n "read_more"}}</a>
-    {{ else }}
-    <a href="{{ .Permalink }}" class="btn btn-primary btn-sm">{{ i18n "read_more"}}</a>
-    {{ end }}
+
+
+  <div class="inner my-40">
+
+    <div class="docs-content">
+
+      {{ $include_dict := dict "page" . "Site" .Site }}
+      <div class="">
+
+     
+
+
+        <!-- BEGIN content -->
+        {{ if (.Content | or ( .Summary )) }}
+        <div class="box box-bd">
+          <!-- <header class="pb-18">
+            <h2>Review {{ .Params.title }}</h2>
+          </header> -->
+          <div class="post-columns">
+            {{ if .Params.feature }}
+            <figure class="post-cover mb-40">
+              <figcaption class="post-thumbnail m-0">
+    
+                {{ $ratio := .Params.bg_ratio }}
+                {{ $bg_color := .Params.bg_color }}
+                {{ $post := . }}
+                {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+    
+                {{ if .Params.site }}
+                <iframe scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="{{ .Params.site }}"></iframe>
+                {{ end }}
+              </figcaption>
+            </figure>
+            {{ end }}
+
+            {{ partial "_show-more.html" . }}
+
+
+            {{ $root_docs_path := trim .Site.Data.doc_sections.root_docs_path "/" }}
+            {{ $current_page_url := trim .URL "/" }}
+            {{ if ne $root_docs_path $current_page_url }}
+            {{ $child_pages := (($.Site.GetPage "section" $current_page_url).Pages).ByWeight }}
+            {{ $child_count := $child_pages | len }}
+            {{ $has_children := cond (gt $child_count 0) true false }}
+            {{ if $has_children }}
+            <ul class="docs-section-items">
+              {{ range $child_page := $child_pages }}
+              <li class="docs-section-item"><a href="{{ $child_page.URL }}"
+                  class="docs-item-link">{{ $child_page.Title }}<span class="icon-angle-right"
+                    aria-hidden="true"></span></a></li>
+              {{ end }}
+            </ul>
+            {{ end }}
+            {{ end }}
+          </div>
+
+          <footer class="pb-0">
+            <hr>
+            {{ partial "_prev-next.html" . }}
+          </footer>
+        </div>
+        {{ end }}
+        <!-- END content -->
+
+        <div class="mt-30 mb-50">
+          <div class="post-nav">
+            {{ partial "_prev-next.html" . }}
+            <div class="post-soc">
+              {{ .Scratch.Set "mode" "light" }}
+              {{ partial "_soc.html" . }}
+            </div>
+          </div>
+        </div>
+
+        <!-- BEGIN related -->
+        <div class="my-30 text-center">
+
+          <div class="block-header inner">
+            <div class="heading-group">
+              <div class="heading-main">
+                <i class="ti-crown"></i>
+                <h2 class="block-title block-title-sm d-inline-block"> Related News </h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-related mx-n-1">
+            {{ $display_posts := ((.Site.GetPage "section" "/info/news").Pages).ByDate.Reverse }}
+            {{ $post := uniq ($display_posts) }}
+            {{ $size := 23 }}
+            {{ $gap := 1 }}
+            {{ $gap_mod := 0 }}
+            {{ range $index, $post := $display_posts }}
+            {{if le $index 3 }}
+            {{ partial "_news-card-related.html" (dict "context" . "post" $post  "size" $size "gap" $gap "gap_mod" $gap_mod  ) }}
+            {{ end }}
+            {{ end }}
+          </div>
+        </div>
+        <!-- END related -->
+
+
+
+        {{ partial "_tags.html" . }}
+
+        {{ partial "_subscribe-form.html" . }}
+
+        <!-- BEGIN comments -->
+        <div class="my-50">
+          <div class="heading-group">
+            <div class="heading-main">
+              <i class="ti-crown"></i>
+              <h2 class="block-title block-title-sm d-inline-block"> Comments </h2>
+            </div>
+          </div>
+          {{ partial "_comments.html" . }}
+        </div>
+        <!-- END comments -->
+
+
+      </div>
+
+      {{ partial "_casino-sidebar.html" . }}
+
+
+    </div>
   </div>
-</div>
+
+  {{ end }}

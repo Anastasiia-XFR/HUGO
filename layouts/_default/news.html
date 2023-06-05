@@ -1,0 +1,153 @@
+{{ define "content" }}
+
+{{ $data := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "_hero.html" . }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="inner">
+  <div class="flex flex-wrap my-80">
+    {{ $display_posts := ((.Site.GetPage "section" "/info/news").Pages).ByDate.Reverse }}
+
+    {{ $count := slice }}
+    {{ range $index, $post := $display_posts }}
+    {{ $count = $count | append $index }}
+    {{ end }}
+
+    {{ $step := 5 }}
+    <!-- {{ len $count }} -->
+
+    {{ $blockOne := slice}}
+    {{ $blockTwo := slice}}
+    {{ $blockThree := slice }}
+    {{ $blockFour := slice }}
+    {{ $blockFive := slice }}
+    {{ $blockSix := slice }}
+    {{ $blockSeven := slice }}
+    {{ $blockEight := slice }}
+
+    {{ range $ind, $el := $count }}
+    {{ $stepOne := mul $el 8 }}
+    {{ $stepTwo := add $stepOne 1 }}
+
+    {{ $stepThree := add $stepTwo 1 }}
+    {{ $stepFour := add $stepThree 1 }}
+    {{ $stepFive := add $stepFour 1 }}
+    {{ $stepSix := add $stepFive 1 }}
+    {{ $stepSeven := add $stepSix 1 }}
+    {{ $stepEight := add $stepSeven 1 }}
+
+
+    {{ $blockOne = $blockOne | append $stepOne }}
+    {{ $blockOne = $blockOne | append $stepTwo }}
+
+    {{ $blockTwo = $blockTwo | append $stepThree }}
+    {{ $blockTwo = $blockTwo | append $stepFour }}
+    {{ $blockTwo = $blockTwo  | append $stepFive }}
+    {{ $blockTwo = $blockTwo  | append $stepSix }}
+    {{ $blockTwo = $blockTwo  | append $stepSeven }}
+    {{ $blockTwo = $blockTwo  | append $stepEight }}
+
+    {{ end }}
+
+    {{ $blockThree = $blockThree | append $blockOne }}
+    {{ $blockThree = uniq ($blockThree) | sort }}
+    <!-- {{ $blockThree }} -->
+
+    {{ $blockFour = $blockFour | append $blockTwo }}
+
+    {{ $blockFour = uniq ($blockFour) | sort }}
+    <!-- {{ $blockFour }} -->
+
+    {{ range $i, $el := $blockFour }}
+    {{ if gt $el 0 }}
+    {{ $blockFive = $blockFive | append $el }}
+    {{ end }}
+    {{ end }}
+    <!-- {{ $blockFive }} -->
+
+    {{ $paginator := .Paginate $display_posts 8 }}
+    {{ range $index, $post := $paginator.Pages }}
+
+    {{ range $blockFive }}
+    {{ $currentPost := . }}
+    <!-- {{ $currentPost }} -->
+    {{ if eq $index $currentPost }}
+    <div class="post post-news w-32" style="padding: 1%;">
+
+      {{ if $post.Params.feature }}
+      {{ $ratio := $post.Params.bg_ratio }}
+      {{ $bg_color := $post.Params.bg_color }}
+      {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+      {{ end }}
+
+      <a class="post-content" href="{{ $post.RelPermalink }}">
+        <div class="post-header pb-10">
+          <div class="post-meta">
+            <time class="published"
+              datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">{{ $post.Date | dateFormat "January 02 / 2006 / 15:04" }}</time>
+          </div>
+          <h2 class="post-title">
+            {{ $post.Params.title | truncate 100 }}
+          </h2>
+        </div>
+
+        <div class="post-footer">
+          {{ if $post.Params.excerpt }}
+          <p class="post-excerpt">{{ $post.Params.excerpt | truncate 100 }}</p>
+          {{ end }}
+          <span class="read-more-link p-0"> Read More </span>
+        </div>
+      </a>
+
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ range $blockThree }}
+    {{ $currentPost := . }}
+    <!-- {{ $currentPost }} -->
+    {{ if eq $index $currentPost }}
+    <div class="post post-news w-48" style="padding: 1%;">
+      {{ if $post.Params.feature }}
+      {{ $ratio := $post.Params.bg_ratio }}
+      {{ $bg_color := $post.Params.bg_color }}
+      {{ partial "_picture.html" (dict "context" . "post" $post "ratio" $ratio "bg_color" $bg_color ) }}
+      {{ end }}
+      <a class="post-content" href="{{ $post.RelPermalink }}">
+        <div class="post-header pb-10">
+          <div class="post-meta">
+            <time class="published"
+              datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">{{ $post.Date | dateFormat "January 02 / 2006 / 15:04" }}</time>
+          </div>
+          <h2 class="post-title">
+            {{ $post.Params.title | truncate 100 }}
+          </h2>
+        </div>
+
+        <div class="post-footer">
+          {{ if $post.Params.excerpt }}
+          <p class="post-excerpt">{{ $post.Params.excerpt | truncate 100 }}</p>
+          {{ end }}
+          <span class="read-more-link p-0"> Read More </span>
+        </div>
+      </a>
+
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ end }}
+
+
+  </div>
+
+  <!-- Pagination TBD -->
+  <div class="mb-50 mt-30">
+    {{ partial "pagination.html" . }}
+  </div>
+
+</div><!-- .inner-md -->
+
+
+{{ end }}

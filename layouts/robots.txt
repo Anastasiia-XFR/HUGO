@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /login
+Disallow: /upload
+Disallow: /admin
+Disallow: /plugins
+Disallow: /search
+Disallow: /?*
+Disallow: *sort=
+Disallow: *utm=
+Disallow: /tag
+Sitemap: https://slotsbrain.com/sitemap.xml
+
+User-agent: GoogleBot
+Disallow: /login
+Disallow: /upload
+Disallow: /admin
+Disallow: /plugins
+Disallow: /search
+Disallow: /?*
+Disallow: *sort=
+Disallow: *utm=
+Disallow: /tag

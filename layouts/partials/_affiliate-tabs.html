@@ -1,0 +1,127 @@
+<!-- BEGIN casino card -->
+<div class="tabs">
+  <header class="tabs-nav">
+    <button class="tabs-toggle active">
+      Main Info
+    </button>
+
+    {{ if (.Params.good | or (.Params.bad)) }}
+    <button class="tabs-toggle">
+      Benefits & Negatives
+    </button>
+    {{ end }}
+
+  </header>
+  <div class="tabs-content">
+    <section class="tabs-block">
+
+      <!-- BEGIN table -->
+      <div class="table">
+
+        {{ if .Params.site }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> Site: </div>
+          <div class="table-col">
+            <a href="{{ .Params.site | truncate 100 }}?ref={{ .Site.BaseURL }}">
+              {{ .Params.site | truncate 100 }}
+            </a>
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.soft }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> Provider: </div>
+          <div class="table-col">
+            {{ .Params.soft | truncate 100 }}
+          </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.casinos }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> Casino: </div>
+          <div class="table-col"> {{ .Params.casinos | truncate 100 }} </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.payments }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> Paymenth Methods: </div>
+          <div class="table-col">
+
+            {{ range first 100 .Params.payments }}
+            {{ . | title }};
+            {{ end }}
+
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.withdrawals }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> Widthdrawl Limit: </div>
+          <div class="table-col">
+
+            {{ .Params.withdrawals | truncate 100 }}
+
+          </div>
+        </div>
+        {{ end }}
+
+
+        {{ if .Params.subaffiliates }}
+        <div class="table-row">
+          <div class="table-col table-col-heading"> SubAffiliates: </div>
+          <div class="table-col">
+            {{ .Params.subaffiliates | truncate 100 }}
+          </div>
+        </div>
+        {{ end }}
+
+      </div>
+      <!-- END table -->
+
+    </section>
+
+    {{ if (.Params.good | or (.Params.bad)) }}
+    <section class="tabs-block">
+
+      <div class="table-row">
+        {{ if .Params.good }}
+        <div class="table-col table-col-heading"> Good: </div>
+        {{ end }}
+        {{ if .Params.bad }}
+        <div class="table-col table-col-heading"> Bad: </div>
+        {{ end }}
+      </div>
+      <div class="table-row ai-fs">
+        {{ if .Params.good }}
+        <div class="table-col">
+          <ul>
+            {{ range .Params.good }}
+            <li> {{ . | truncate 200 }} </li>
+            {{ end }}
+          </ul>
+
+        </div>
+        {{ end }}
+        {{ if .Params.bad }}
+        <div class="table-col">
+          <ul>
+            {{ range .Params.bad }}
+            <li> {{ . | truncate 200 }} </li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+      </div>
+
+    </section>
+
+    {{ end }}
+
+  </div>
+</div>
+<!-- END casino card -->
