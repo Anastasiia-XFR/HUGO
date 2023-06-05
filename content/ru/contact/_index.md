@@ -1,8 +1,8 @@
 ---
-title: "Contact US"
+title: "Contact"
+date: 2019-11-25T13:39:07+06:00
 draft: false
-# page title background image
-bg_image: "images/backgrounds/contact-page.jpg"
-# meta description
-description : "this is meta description"
+description : "This is meta description"
+bgImage : "images/backgrounds/header-bg.jpg"
 ---
+

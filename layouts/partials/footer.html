@@ -1,104 +1,179 @@
-<!-- footer -->
-<footer class="footer">
-  <div class="container" style="position: relative; z-index: 1;">
-    <div class="row justify-content-center py-3">
+<button class="btn-top"><i class="ti-angle-up"></i></button>
 
-      <div class="col-md-9 text-center text-md-left">
+<footer class="footer py-0">
 
+  <div class="footer-top py-4 {{ if (eq .Params.footer "night" | or (in .URL "games")) }} bg-night {{ end }}">
+    <div class="container">
+      <div class="row align-items-center justify-content-center text-center">
+        <div class="col-xl-7 order-1 order-xl-0">
+         <!-- subscribe -->
+         <h5 class="d-none">{{ i18n "txt16" }}:</h5>
 
-        <div class="row align-items-center">
+         <form action="#" method="POST" class="subscribe-form justify-content-center mt-2 mt-xl-0">
+          <input type="email" placeholder="Your email" id="subscribe-form-email">
+          <button type="submit">{{ i18n "subscribe" }}</button>
+        </form>
 
-          <div class="col-md-8">
-
-            <!-- BEGIN soc -->
-            {{- partial "_soc-all.html" . -}}
-            <!-- END soc -->
-            <p clas="d-none d-sm-block">
-              Мы инновационная, динамично развивающаяся консалтинговая компания, открывающая перед инвесторами
-              глобальные перспективы в мире Web 3.0 технологий и геополитического устройства мира финансов.
-            </p>
-          </div>
-          <div class="col-md-4">
-            <a href="/about" class="btn-sm btn-bd mr-sm-2">
-              О нас
-            </a>
-            <a href="/adv" class="btn-sm btn-bd my-3">
-              Реклама
-            </a>
-          </div>
-        </div>
-
-
-        <div class="footer__btm row align-items-center">
-          <div class="col-md-4">
-            <div class="logo__wrap mb-4 mb-md-0 d-none d-md-block">
-              <a href="{{ .Site.BaseURL }}" class="d-flex align-items-center">
-                <img class="" src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}"
-                  width="{{ .Site.Params.logo_w }}">
-              </a>
-              <!-- <span>International Trade Group</span> -->
-            </div>
-          </div>
-          <div class="col-md-8">
-            Все опубликованные материалы принадлежат ITG. Вы можете перепечатывать наши материалы только после
-            согласования с редакцией и с указанием активной ссылки на ITG.
-          </div>
-        </div>
-
-
-
+        <!-- /subscribe -->
       </div>
-      <div class="col-md-3 mt-4 mt-md-0">
-        <div class="qr">
-          <img src="{{ `images/news.svg` | relURL }}" width="170" height="170" alt="{{ .Title }}">
+      <div class="col-xl-3">
+        <div class="">
+          <!-- soc -->
+          <h5 class="d-none">{{ i18n "follow-us" }}:</h5>
+          <nav class="soc soc-btn">
+
+          <!--   {{  range .Site.Params.Share }}
+
+            <a href="{{ .link | safeURL }}"><i class="soc-icon {{ .icon }}"></i></a>
+
+            {{ end }} -->
+
+            {{ partial "_social-share-btn.html" . }}
+
+          </nav>
+          <!-- /soc -->
         </div>
-        <nav class="policy mt-2">
-          <a href="/privacy">Политика приватности</a><br>
-          <a href="/terms">Условия пользования</a>
-        </nav>
       </div>
     </div>
+  </div>
+</div>
 
+<div class="footer-center py-3 py-lg-2 {{ if eq .Site.Params.theme "night" }} footer-dark {{ end }}">
+  <div class="container">
+    <div class="row mt-5 d-none">
+      <div class="col-md-6 col-lg-4 col-sm-6 mb-5 mb-lg-0 text-center text-sm-left mr-auto">
+
+
+        <p class="lead">{{ .Site.Params.footer.content | markdownify }}</p>
+        <p class="d-none"><b>Support Email:</b> <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
+
+
+
+      </div>
+
+
+
+    </div>
+
+    <div class="row justify-content-center align-items-center text-center">
+
+      <a class="navbar-brand mb-2 mb-lg-0" href="{{ .Site.BaseURL | relLangURL }}"><img class="img-fluid" src="{{ if eq .Site.Params.theme "night" }} {{ .Site.Params.logoWhite | relURL }} {{ else }} {{ .Site.Params.logo | relURL }} {{ end }} "
+        alt="{{ .Site.Title }}"></a>
+
+        <ul class="footer-nav my-0">
+          {{ range .Site.Menus.footer }}
+          <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+
+      </div>
+
+    </div>
   </div>
+
+
+  <div class="footer-btm {{ if eq .Site.Params.theme "night" }} footer-btm-dark {{ end }} py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 text-center">
+          <p class="copyright mb-0 ">{{ .Site.Params.copyright }}</p>
+        </div>
+      </div>
+    </div>
   </div>
+
 </footer>
-<!-- /footer -->
 
-{{ if .Site.Params.search }}
+<!-- search index -->
 <script>
-  var indexURL = {{ "index.json" | relURL}}
+  var indexURL = {{`index.json` | relURL}}
 </script>
-{{ end }}
 
-{{ "<!-- Google Map API -->" | safeHTML }}
-{{ with .Site.Params.map.gmap_api }}
-<script src="{{ . | safeURL }}"></script>
-{{ end }}
 
-{{ "<!-- JS Plugins -->" | safeHTML }}
+
+
+  {{ "<!-- plugins -->" | safeHTML }}
+  {{ range .Site.Params.plugins.css }}
+  <link rel="stylesheet" href="{{ .URL | relURL }} ">
+  {{ end }}
+
+  {{ "<!-- Main Stylesheet -->" | safeHTML }}
+  {{ $styles := resources.Get "scss/style.scss" | toCSS | minify }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+  
+<!-- Snipcart public key -->
+<!-- <div hidden id="snipcart" data-api-key="{{ .Site.Params.snipcartAPI }}"></div> -->
+
+
+<!-- JS Plugins -->
 {{ range .Site.Params.plugins.js}}
-<script src="{{ .link | relURL }}"></script>
+<script src="{{ .URL | relURL }}"></script>
 {{ end }}
-
-{{ "<!-- Main Script -->" | safeHTML }}
+<!-- Main Script -->
 {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 
-{{ "<!-- google analitycs -->" | safeHTML }}
-{{ with .Site.Params.google_analitycs_id}}
-<script>
-  (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-  ga('create', '{{ . }}', 'auto');
-  ga('send', 'pageview');
-</script>
-{{ end }}
+
+
+<!-- Google Tag Manager -->
+<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ .Site.Params.gtm }}');</script> -->
+<!-- End Google Tag Manager -->
+
+
+<!-- Google Tag Manager (noscript) -->
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.gtm }}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id={{  .Site.Params.ga }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{  .Site.Params.ga }}');
+  </script> -->
+
+  <!-- Yandex.Metrika counter -->
+ <!--  <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym({{ .Site.Params.ym }}, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/{{ .Site.Params.ym }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript> -->
+  <!-- /Yandex.Metrika counter -->
+
+
+
+  <!-- Google Map API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvWguaJFu6BKQaesn9UGSgtXILZYKNAA4&amp;callback=initMap" async="" defer=""></script> 
+
+
+  <script>
+    $(document).ready(function(){
+
+      $btnToTop = $('.btn-top');
+      $(window).on('scroll', function() {
+        if ($(window).scrollTop() >= 100) $btnToTop.fadeIn();
+        else $btnToTop.fadeOut();
+      });
+      $btnToTop.on('click', function() {
+        $('html').animate({scrollTop: 0}, 900);
+      });
+
+    });
+
+  </script>

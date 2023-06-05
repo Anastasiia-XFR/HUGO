@@ -1,13 +1,15 @@
 ---
-title: "Новости"
-title_before: ""
-titile_after: ""
-bg_image: "images/backgrounds/bg-news.jpg"
+title: "All News"
+subtitle: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, tempora?"
 
-description : ""
-description_before: ""
-description_after: ""
-
+date: 2019-11-25T13:39:07+06:00
 draft: false
+
+description : "This is meta description"
+
+bgImage : "images/backgrounds/bg-news.jpg"
+color : "white"
+footer: "night"
+hero: "night"
 ---
 
